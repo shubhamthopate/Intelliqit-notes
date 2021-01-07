@@ -298,7 +298,9 @@ Hard Reset
 8 To move to an older version example b version
   git reset --hard b_commit_id_from_step7
 
-
+9 To check all logs 
+  git reflog
+  
 Soft Reset will move the git one step back ie we will see the files as
 present in the stagging ares
 git reset --soft older_commit_id

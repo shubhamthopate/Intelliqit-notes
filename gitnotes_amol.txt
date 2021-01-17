@@ -504,7 +504,7 @@ Tags are clasified into 2 types
   This is also by default created for the top most commit
 
 4 To create an annoted tag for an older commit
-  git tag -a tag_name -m "some message" older_commit_id
+  git tag -a tag_name -m "any message" older_commit_id
 
 5 To see the list of all the tags
   git tag

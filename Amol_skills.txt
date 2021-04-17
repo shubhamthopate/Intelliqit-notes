@@ -1,0 +1,61 @@
+1 launch ec2 install httpd and php --> make changes in php.ini file 
+php.ini --> short_open_tag --> turn off to on
+
+2 copy files from one server to another server using scp
+scp -r -i /var/www/pem.pem  ec2-user@pub_ip_dest-server/var/www/html
+ 
+3 add A record in domain provider portal for website 
+if you need to create www.amolganje.com --> add A record in godaddy with server ip
+
+4 use of SNS,SES service 
+
+5 create vpc,s3 bucket 
+
+6 copy files from ec2 to s3 
+aws s3 ./ s3:///folder1/ --recursive
+
+7 create sites in ec2 --> /etc/httpd/conf.d/sites.conf
+for multiple website you need to create this sites.conf file 
+
+<VirtualHost *:80>
+ServerAdmin amolganje1@gmail.com
+DocumentRoot /var/www/html/
+ServerName jenkins.amolganje.com
+ErrorLog /var/www/html/logs
+CustomLog /var/www/html/logs/
+</VirtualHost>
+
+8 create,download,upload,db in phpmyadmin
+need to have phpmyadmin page
+
+9 make changes in project for db connection 
+this is internal 
+
+10 vpn creation --> connect to vpn 
+
+11 cpanel downlaod files and copy files 
+
+12 install ssl on cpanel 
+for this go to cpanel --> generate key and SSR then provied it to ssl purchase person he will provide you CRT cert and upload it in cpanel -->done
+
+13 code commit,code deploy,code build
+
+14 cloudwatch alarm creation 
+
+15 kms key to encrypt data
+ encrytp file 
+
+1 echo "my website: https://tech.david-cheong.com" > plaintext.txt
+2 openssl rand -out plaintext.bin  32
+3 aws kms encrypt --key-id alias/demo --plaintext fileb://plaintext.bin 
+4 aws kms encrypt --key-id alias/demo --plaintext fileb://plaintext.txt --query CiphertextBlob --output text | base64 -d > encrypted.txt
+5 ls
+encrypted.txt	plaintext.bin	plaintext.txt
+6 aws kms decrypt --ciphertext-blob fileb://encrypted.txt     
+7  aws kms decrypt --ciphertext-blob fileb://encrypted.txt --query Plaintext --output text | base64 -d > decrypted.txt
+8 cat decrypted.txt 
+
+
+16 change owner and  permission of folders in linux 
+   chmod -R 777 /html
+   chown -R ec2-user:ec2-user /html

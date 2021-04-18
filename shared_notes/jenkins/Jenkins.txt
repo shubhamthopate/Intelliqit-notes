@@ -1,0 +1,1134 @@
+Day 1
+===================================================================
+
+Jenkins
+===============
+This is a tool for implementing CI-CD
+
+Stages in CI-CD
+===========================
+Stage 1 (Continuous Download)
+-------------------------------------
+Developers create some code and upload that code into the version controlling
+system.The moment code is uplaoded Jenkins gets a notification and it will
+download that code,this is called Continuous Download
+
+Stage 2 (Continuous Build)
+--------------------------------------
+The code downloaded in the previous stage has to converted into an artifact
+This artifact can come in the format of war,jar,ear,exe file etc.To convert the
+code into an artifact jenkins takes the help of centain build tools like
+ANT,Maven,MsBuild etc.
+
+Stage 3 (Continuous Deployment)
+-------------------------------------
+The artifact created in the previous stage is now deployed into the testing
+environment.This Testing environment can be running on some application 
+servers like tomcat,Jboss,Weblogic etc.Jenkins should deploy the artifact into
+these application servers from where testers can start accessing it
+
+Stage 4 (Continuous Testing)
+-------------------------------------
+Jenkins now executes the automation test scripts created by the testers
+and check if the application is working according to the clients requirement
+If it doesnot Jenkins will send wmail notificatiosn to thje concerned team
+members and developers will fix the defects and upload the modified code
+into the version controlling system.Jenkins will now start from stage 1
+
+Stage 5 (Continuous Delivery)
+---------------------------------------
+If testing passes JEnkins will now take approvals from the delivery team and
+deploy the artifact into the prod environment where the end user can start 
+accessing it.
+
+Note: The first four stages are called CI (Congtinuous Integration)
+The laste stage is called as CD (Continuous Delivery)
+
+
+Setup of 3 Ubuntu servers using vagrant
+===============================================
+Vagrant
+===================
+1 Download and install Oracle virtual Box
+  https://www.virtualbox.org/wiki/Downloads
+
+2 Download and install vagrant
+  https://www.vagrantup.com/downloads.html
+
+3 To check if vagrant is installed
+  vagrant --version
+
+4 Copy the vagrantfile into an empty folder
+
+5 Open cmd prompt
+  cd path_of_folder_where_vagrantfile_is_copied
+  vagrant up
+
+6 Open Oracle virtual box to access these VM's
+  Username and Password: vagrant
+
+6 To destroy the VM's
+  vagrant destroy
+
+
+===========================================================================
+Day 2
+===========================================================================
+
+
+
+Setup of Jenkins environment for CI-CD
+============================================
+1 Create 3 AWS ubuntu instances and name them
+  JenkinsServer,QAServer,ProdServer
+
+2 Connect to JenkinsServer AWS instance uisng git bash
+
+3 Update the apt repository
+  sudo apt-get update
+
+4 Install jdk
+  sudo apt-get install -y openjdk-8-jdk
+
+5 Install git and maven
+  sudo apt-get install -y git maven
+
+6 Download jenkins.war
+  wget https://get.jenkins.io/war-stable/2.263.1/jenkins.war
+
+7 To start jenkins
+  java -jar jenkins.war
+
+8 To access jenkins from browser
+  public_ip_of_jenkinsserver:8080
+
+9 Unlock jenkins by entering the password
+
+10 Click on "Install suggested plugins"
+
+11 Create First admin user--->Click on Continue--->Finish
+
+-------------------------------------------------------------------------------
+Setup of tomcat on QA and PRodServers
+-----------------------------------------
+1 Connect to QAServer Aws instance uisn git bash
+
+2 Update the apt repository
+  sudo apt-get update
+
+3 Install tomcat9
+  sudo apt-get install -y tomcat9
+
+4 Install tomcat9-admin
+  sudo apt-get install -y tomcat9-admin
+
+5 Edit the tomcat-users.xml file
+  sudo vim /etc/tomcat9/tomcat-users.xml
+  Delete the entire content of the file and add the below data
+
+<tomcat-users>
+    <user username="intelliqit" password="intelliqit" roles="manager-script"/>
+</tomcat-users>
+
+6 Restart tomcat9
+  sudo service tomcat9 restart
+
+7 To access tomcat from the level of browser
+  public_ip_qaserver:8080
+
+Repeat the above 7 steps on ProdServer AWS instance
+
+=============================================================================
+Day 3
+=============================================================================
+Stage 1 (Continuous Download)
+=======================================
+1 Open the dashboard of jenkins
+2 Click on New item---->Enter some item name "Development"
+3 Select Free Style Project---->OK
+4 Go to Source code Management
+5 Select Git
+6 Enter the github url where developers have uploaded the code
+  https://github.com/intelliqittrainings/maven.git
+7 Click on Apply--->Save
+8 Go to the dashboard of Jenkins
+9 Go to the Development job and click on Build icon
+  This job will download all the code uploaded by the developers
+  into the remote git server
+
+Stage 2 (Continuous Build)
+===============================================
+1 Open the dashboard of Jenkins
+2 Go to the Development job---->Click on confgure
+3 Go to Build section
+4 Click on Add Build step
+5 Click on Invoke top level maven targets
+6 Enter maven goal: package
+7 Click on Apply--->Save
+8 Go to the dashboard of Jenkins
+9 Go to Development job---->Click on Build icon
+  This job will convert the java code into an artifact
+  This artifact comes in the fromat of a war file
+
+Stage 3 (Continuous Deployment)
+====================================================
+1 Open the dashboard of Jenkins
+2 Click on Manage Jenkins
+3 Click on Manage Plugins
+4 Go to Availabel section
+5 Search for "Deploy to Container" plugin
+6 Click on Install without restart
+7 Go to the dashboard of JEnkins
+8 Go to the Development job---->Click on Configure
+9 Go to Post Build actions
+10 Click on Add Post Build actions
+11 Click on Deploy war/ear to container
+   war/ear files: **/*.war
+   Context path: testapp
+   Click on Add container
+   Select tomcat9
+   Enter username and password of tomcat
+   tomcat url: private_ip_of_qaserver:8080
+12 Apply---->save
+13 Go to the dashbord of Jenkins
+14 Go to the Development job---->Click on Build icon
+   This job will deploy the artfact into the qaserver
+15 To access the application from the browser
+   public_ip_of_qaserver:8080/testapp
+
+========================================================================
+Day 4
+========================================================================
+Stage 4 (Continuous Testing)
+======================================
+1 Open the dashboard of Jenkins
+2 Create a new job and name it "Testing"
+3 Select Free Style Project--->OK
+4 Slelect Git--->Enter the github url where teters have uplaoded the code
+  https://github.com/intelliqittrainings/FunctionalTesting.git
+5 Go to Build section
+6 Click on Add Build step
+7 Click on Execute shell
+  java -jar path/testing.jar
+8 Apply--->Save
+9 Go to the dashbord of jenkins
+10 Go to the testing job--->Click on Build icon
+  This job will download the selenium test scripts and execute them
+
+Linking the Development job with the Testing job
+========================================================
+The Development job has to be linked with the testing job so that all
+the satages of CI-CD can happen in a flow.This is called as upstream/downstream
+config in jenkins
+
+1 Go to the dashboard of jenkins
+2 Go to the development job
+3 Click on Configure
+4 Go to Post build actions
+5 Click on Add post build action
+6 Click on Build other projects
+7 Enter project name as "Testing"
+8 Apply--->Save
+
+
+===============================================================================
+Copying artifacts from Development job and Testing job
+===========================================================
+1 Open the dashboard of Jenkins
+2 Click on Manage Jenkins--->Manage Plugins
+3 Go to Available section
+4 Search for "Copy Artifact" plugin
+5 Click on Install without restart
+6 Go to the dashboard of Jenkins
+7 Go to the Development job--->Click on configure
+8 Go to Post Build actions
+9 Click on Add Post Build actions
+10 Click on Archive the artifacts
+   File to archive: **\*.war
+11 Apply--->Save
+12 Go to the dashbord of Jenkins
+13 Go to the Testing job---->Click on Configure
+14 Go to Build section
+15 Click on Add Build step
+16 Click on Copy artifacts from other projects
+17 enter project name as Development
+18 Save
+
+
+Stage 5 (Continuous Delivery)
+===============================
+1 Open the dashboard of JEnkins
+2 Go to the Testing job
+3 Click on Configure
+4 Go to Post Build actions
+5 Click on Add post build action
+6 Click on Deploy war/ear to container
+7 war/ear files: **/*.war
+  Context path: prodapp
+  Click on Add container
+  Select tomcat9
+  Enter username and password of tomcat9
+  Tomcat url: private_ip_of_prodserver:8080
+8 Apply--->Save
+
+==================================================================
+Day 5
+==================================================================
+====================================================================
+User Administration in Jenkins
+===========================================
+
+Creating users in Jenkins
+===========================
+1 Open the dashboard of jenkins
+2 click on manage jenkins
+3 click on manage users
+4 click on create users
+5 enter user credentials
+
+Creating roles and assgning
+==============================
+1 Open the dashboard of jenkins
+2 click on manage jenkins
+3 click on manage plugins
+4 click on role based authorization strategy plugin
+5 install it
+6 go to dashboard-->manage jenkins
+7 click on configure global security
+8 check enable security checkbox
+9 go to authorization section-->click on role based strategy  radio button
+10 apply-->save
+11 go to dashboard of jenkins
+12 click on manage jenkins
+13 click on manage and assign roles
+14 click on mange roles
+15 go to global roles and create a role "employee"
+16 for this employee in overall give read access
+   and in view section give all access
+17 go to project roles-->Give the role as developer
+   and patter as Dev.* (ie developer role can access
+   only those jobs whose name start with Dev)
+18 similarly create another role as tester and assign the pattern as "Test.*"
+19 give all permissions to developrs and tester
+20 apply--save
+21 click on assign roles
+22 go to global roles and add user1 and user2 
+23 check user1 and user2 as employees
+24 go to item roles
+25 add user1 and user2
+26 check user1 as developer and user2 as tester
+27 apply-->save
+If we login into jenkins as user1 we can access only the development 
+related jobs and user2 can access only the testing related jobs
+========================================================================
+
+Alternate ways of Setup of Jenkins
+=========================================
+
+Setups of jenkins as a direct installation
+-------------------------------------------------
+1 Update the apt repository
+  sudo apt-get update
+
+2 Install java
+  sudo apt-get install -y openjdk-8-jdk
+
+3 Add the jenkins repository keys to the apt repository
+  wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key 
+                                                        | sudo apt-key add -
+
+4 Add the debain package address to jenkins.list file
+  sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
+                                        /etc/apt/sources.list.d/jenkins.list'
+
+5 Update the apt repository
+  sudo apt-get update
+
+6 Install jenkins
+  sudo apt-get install -y jenkins
+
+============================================================================
+Setup of Jenkins uisng tomcat
+---------------------------------
+1 Update apt repository
+  sudo apt-get update
+
+2 Install tomcat9
+  sudo apt-get install -y tomcat9
+
+3 Install tomcat9-admin
+  sudo apt-get install -y tomcat9-admin
+
+4 Download the jenkins.war file
+  wget https://get.jenkins.io/war-stable/2.249.2/jenkins.war
+
+5 Give wite permssion on tomcat9 folder to others
+  sudo chmod o+w  -R /var/lib/tomcat9
+
+6 Copy the jenkins.war into the tomcat9 webapps folder
+  cp jenkins.war /var/lib/tomcat9/webapps
+
+7 To access tomcat from browser
+  public_ip:8080
+  To access jenkins running on tomcat
+  public_ip:8080/jenkins
+
+==========================================================================
+Day 6
+==========================================================================
+MAster Slave Architecture of Jenkins
+============================================
+This is used distribute the work load to additional linux
+servers called as slaves.This is used when we want to run multiple 
+jobs on jenkins parallelly.
+
+Setup
+============
+1 Create a new AWS ubuntu20 instance
+
+2 Install the same version of java as present in the master
+  sudo apt-get update
+  sudo apt-get install -y openjdk-8-jdk
+
+3 Setup passwordless SSH betwen Master and slave
+  a) Connect to slave and set password to default user
+     sudo passwd ubuntu
+  b) Edit the ssh config file
+     sudo vim /etc/ssh/sshd_config
+     Search for "PasswordAuthentication" and change it from no to yes
+  c) Restart ssh
+     sudo service ssh restart
+  d) Connect to Master using git bash
+  e) Generate the ssh keys
+     ssh-keygen
+  f) Copy the ssh keys
+     ssh-copy-id ubuntu@private_ip_of_slave
+     This will copy the content of the public keys to a file called
+     "authorised_keys" on the slave machine
+
+
+===========================================================================
+  Connect to slave using git bash
+4 Downlaod the slave.jar file
+  wget http://private_ip_of_jenkinsserver:8080/jnlpJars/slave.jar
+
+5 Give execute permissions to the slave.jar
+  chmod u+x slave.jar
+
+6 Create an empty folder that will be the workspace of jenkins
+  mkdir workspace
+
+7 Open the dashboard of Jenkins
+  
+8 Click on Manage Jenkins--->Click on Manage Nodes and Clouds
+
+9 Click on New node---->Enter some node name as Slave1
+
+10 Select Permanant Agent--->OK
+
+12 Enter remote root directory as /home/ubuntu/workspace
+
+13 Labels: myslave (This label is associated with a job in jenkins
+   and then that job will run on that slave)
+
+14 Go to Launch Method and select "Launch agent via execution of command on master"
+
+15 Click on Save
+
+16 Go to the dashboard of Jenkins
+
+17 Go to the job that we want to run on slave---->Click on Configure
+
+18 Go to General section
+
+19 Check restrict where this project can be run
+
+20 Enter slave label as myslave
+
+============================================================================
+Day 7
+============================================================================
+=========================================================================
+Pipeline as Code
+======================
+Implementing all the stages of CI-CD from the level of a Grrovy script
+file is called as Pipleine as Code.This groovy script files is called
+as Jenkinsfile and generally it is uploaded into the remote git server
+along with the application code.From the remote git server this JEnkinsfile
+will trigger all the stages of CI-CD
+
+Advantages
+====================
+1 Since the stages of CI-CD are implemented from the level of code
+  it can perform version controlling on it ie it gives the team members
+  ability to edit and review the code and yet maintain multiple versions 
+  of jenkinsfile
+
+2 Jenkinsfile can withstand planned and unplanned restarts of the Jenkins
+  master
+
+3 It can perform all stages of CI-CD with minumum number of plugins as
+  a result of which it give better perfromance than the free style projects
+
+4 It can handle all the real time challanges like if conditions,
+  errror handling etc
+
+
+Pipeline can be implemented in 2 ways
+1 Scripted Pipeline
+2 Declarative Pipeline
+
+Syntax of Scripted Pipeline
+=================================
+node('master')
+{
+   stage('Stage name in CI-CD')
+   {
+       Groovy script code for implementing this stage
+   }
+}
+
+
+Syntax of Declarative Pipeline
+====================================
+pipeline
+{
+   agent any
+   stages
+   {
+      stage('Stage name in CI-CD')
+      {
+          steps
+          {
+               Groovy script for implementing this stage
+          }
+      }
+   }
+}
+
+=========================================================================
+Day 8
+=========================================================================
+Scripted piepline
+======================================
+
+node('master') 
+{
+   stage('ContinuousDownload') 
+   {
+      git 'https://github.com/intelliqittrainings/maven.git'
+   }
+   stage('ContinuousBuild')
+   {
+       sh 'mvn package'
+   }
+   stage('ContinuousDeployment')
+   {
+       deploy adapters: [tomcat9(credentialsId: '9ddc009f-64d7-48e3-afcf-ba859a4ebd07', path: '', url: 'http://172.31.82.52:8080')], contextPath: 'testapp1', war: '**/*.war'
+   }
+   stage('ContinuousTesting')
+   {
+       git 'https://github.com/intelliqittrainings/FunctionalTesting.git'
+       sh 'java -jar /home/ubuntu/.jenkins/workspace/ScriptedPipeline/testing.jar'
+   }
+   stage('ContinuousDelivery')
+   {
+        input message: 'Waiting for approval from the DM!', submitter: 'srinivas'
+       deploy adapters: [tomcat9(credentialsId: '9ddc009f-64d7-48e3-afcf-ba859a4ebd07', path: '', url: 'http://172.31.92.195:8080')], contextPath: 'prodapp', war: '**/*.war'
+  
+       
+   }
+   
+   
+   
+   
+}
+
+=======================================================================
+Day 9
+=======================================================================
+Scripted pipeline without deploy to container plugin
+
+node('master') 
+{
+   stage('ContinuousDownload') 
+   {
+      git 'https://github.com/intelliqittrainings/maven.git'
+   }
+   stage('ContinuousBuild')
+   {
+       sh 'mvn package'
+   }
+   stage('ContinuousDeployment')
+   {
+      sh 'scp /home/ubuntu/.jenkins/workspace/ScriptedPipeline/webapp/target/webapp.war ubuntu@172.31.82.52:/var/lib/tomcat9/webapps/qaapp.war'
+   }
+   stage('ContinuousTesting')
+   {
+       git 'https://github.com/intelliqittrainings/FunctionalTesting.git'
+       sh 'java -jar /home/ubuntu/.jenkins/workspace/ScriptedPipeline/testing.jar'
+   }
+   stage('ContinuousDelivery')
+   {
+        input message: 'Waiting for approval from the DM!', submitter: 'srinivas'
+      sh 'scp /home/ubuntu/.jenkins/workspace/ScriptedPipeline/webapp/target/webapp.war ubuntu@172.31.92.195:/var/lib/tomcat9/webapps/prodapp.war'
+  
+       
+   }
+   
+   
+   
+   
+}
+
+===========================================================================
+Day 10
+===========================================================================
+Declarative Pipeline
+==================================
+
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('ContinuousDownload')
+        {
+            steps
+            {
+                git 'https://github.com/intelliqittrainings/maven.git'
+            }
+        }
+        stage('ContinuousBuild')
+        {
+            steps
+            {
+               sh 'mvn package'
+            }
+        }
+         stage('ContinuousDeployment')
+        {
+            steps
+            {
+              sh 'scp /home/ubuntu/.jenkins/workspace/DeclarativePipeline/webapp/target/webapp.war ubuntu@172.31.82.52:/var/lib/tomcat9/webapps/myapp.war'
+            }
+        }
+         stage('ContinuousTesting')
+        {
+            steps
+            {
+              git 'https://github.com/intelliqittrainings/FunctionalTesting.git'
+               sh 'java -jar /home/ubuntu/.jenkins/workspace/DeclarativePipeline/testing.jar' 
+              
+            }
+           
+        }
+         stage('ContinuousDelivery')
+        {
+            steps
+            {
+                input message: 'Required approval from the DM!', submitter: 'srinivas'
+              sh 'scp /home/ubuntu/.jenkins/workspace/DeclarativePipeline/webapp/target/webapp.war ubuntu@172.31.92.195:/var/lib/tomcat9/webapps/myprodapp.war'
+              
+            }
+           
+        }
+        
+    }
+}
+
+
+=======================================================================
+Declarative Pipeline with post conditions
+==============================================
+Post conditions are execute after all the stages are done
+
+pipeline
+{
+  agent any
+  stages
+  {
+      stage('Stage name in CI-CD')
+      {
+          steps
+          {
+               Groovy code
+          }
+     }
+  }
+  post
+  {
+     success
+     {
+     
+     }
+     failure
+     {
+
+     }
+     always
+     {
+ 
+     }
+     abort
+     {
+
+     }
+     changed
+     {
+
+     }
+
+  }
+
+}
+
+===============================================================
+
+
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('ContinuousDownload')
+        {
+            steps
+            {
+                git 'https://github.com/intelliqittrainings/maven.git'
+            }
+        }
+         stage('ContinuousBuild')
+        {
+            steps
+            {
+                sh label: '', script: 'mvn package'
+            }
+        }
+        stage('ContinuousDeployment')
+        {
+            steps
+            {
+                sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/DeclarativePipeline/webapp/target/webapp.war ubuntu@172.31.31.15:/var/lib/tomcat8/webapps/testwebapp.war'
+            }
+        }
+        stage('ContinuousTesting')
+        {
+            steps
+            {
+                git 'https://github.com/intelliqittrainings/FunctionalTesting.git'
+                sh label: '', script: 'java -jar /home/ubuntu/.jenkins/workspace/DeclarativePipeline/testing.jar'
+            }
+        }
+       
+    }
+    post
+    {
+        success
+        {
+            input message: 'Waiting for Approval!', submitter: 'naresh'
+               sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/DeclarativePipeline/webapp/target/webapp.war ubuntu@172.31.26.41:/var/lib/tomcat8/webapps/prodwebapp.war' 
+        }
+        failure
+        {
+            mail bcc: '', body: '', cc: '', from: '', replyTo: '', subject: 'Jenkins CI-CD Failed', to: 'gandham.saikrishna@gmail.com'
+        }
+       
+            
+    
+    }
+    
+    
+    
+}
+
+===========================================================================
+Declarative Pipeline with exception handling
+================================================
+Exception handling is the process of overcoming an exception and
+resuming the execution of the remianing steps in the program
+Exceptio handing is implemented using try,catch
+The section of code that might generate an error should be given
+in the try part.If it fails the control comes to the catch section
+
+Syntax
+---------
+try
+{
+
+}
+catch(Exception e)
+{
+
+}
+
+======================================================================
+
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('ContinuousDownload')
+        {
+        steps
+        {
+        script
+        {
+        try
+        {
+        git 'https://github.com/intelliqittrainings/maven.git'
+        }
+        catch(Exception e1)
+        {
+        mail bcc: '', body: 'Jenkins is unable to download the development code from the github', cc: '', from: '', replyTo: '', subject: 'Download failed', to: 'git.admin@gmail.com'
+        exit(1)
+        }
+        }
+               
+            }
+        }
+        stage('ContinuousBuild')
+        {
+            steps
+            {
+               script
+               {
+                   try
+                   {
+                       sh 'mvn package'
+                   }
+                   catch(Exception e2)
+                   {
+                       mail bcc: '', body: 'Jenkins is unable to create an artifact with maven', cc: '', from: '', replyTo: '', subject: 'Build failed', to: 'developers@gmail.com'
+                       exit(1)
+                   }
+               }
+               
+            }
+        }
+         stage('ContinuousDeployment')
+        {
+            steps
+            {
+              script
+              {
+                  try
+                  {
+                      sh 'scp /home/ubuntu/.jenkins/workspace/DeclarativePipeline/webapp/target/webapp.war ubuntu@172.31.82.52:/var/lib/tomcat9/webapps/myapp.war'
+                  }
+                  catch(Exception e3)
+                  {
+                      mail bcc: '', body: 'Jenkins is unable to deploy into tomcat on the QA environment', cc: '', from: '', replyTo: '', subject: 'Deployment failed', to: 'middleware.team@gmail.com'
+                      exit(1)
+                  }
+              }
+              
+            }
+        }
+         stage('ContinuousTesting')
+        {
+            steps
+            {
+                script
+                {
+                    try
+                    {
+                           git 'https://github.com/intelliqittrainings/FunctionalTesting.git'
+               sh 'java -jar /home/ubuntu/.jenkins/workspace/DeclarativePipeline/testing.jar' 
+                    }
+                    catch(Exception e4)
+                    {
+                        mail bcc: '', body: 'Selenium automation testing has failed', cc: '', from: '', replyTo: '', subject: 'Testing failed', to: 'testing.team@gmail.com'
+                        exit(1)
+                    }
+                }
+            }
+        }
+        stage('ContinuousDelivery')
+        {
+            steps
+            {
+                script
+                {
+                    try
+                    {
+                       input message: 'Required approval from the DM!', submitter: 'srinivas'
+              sh 'scp /home/ubuntu/.jenkins/workspace/DeclarativePipeline/webapp/target/webapp.war ubuntu@172.31.92.195:/var/lib/tomcat9/webapps/myprodapp.war' 
+                    }
+                    catch(Exception e5)
+                    {
+                        mail bcc: '', body: 'Unable to deploy into tomcat on the ProdServers', cc: '', from: '', replyTo: '', subject: 'Delivery failed', to: 'delivery.team@gmail.com'
+                    }
+                }
+            }
+        }
+       
+        
+    }
+   
+    
+    
+    
+    
+    
+    
+}
+
+==========================================================================
+Day 11
+==========================================================================
+
+MultiBranch Pipeline
+===========================
+Developers upload multiple functionalities code on different branches
+On each of these branches there will be a copy of the Jenkinsfile
+which has CI instructions of what should be done on that branch
+
+Developers Activity
+=========================
+1 Clone the maven repository
+  git clone https://github.com/intelliqittrainings/maven.git
+
+2 Move into this cloned repository and delete .git folder
+  cd maven
+  rm -rf .git
+
+3 Initilise a new git repository
+  git init
+
+4 Send the files into stagging area and local repository
+  git add .
+  git commit -m "a"
+
+5 Create a jenkins file and put the stages of CI that should happen 
+  on master  branch
+  vim Jenkinsfile
+
+6 Send it to stagging and local repository
+  git add .
+  git commit -m "b"
+
+7 Create a new branch called loans and create a create a new Jenkinsfile
+  git checkout -b loans
+  vim Jenkinsfile
+  Use the CI instructions that should be done on Loans branch
+
+8 Send this to stagging and local repoistory
+  git add .
+  git commit -m "c"
+
+9 Open github.com---->Create a new repository
+
+10 Push all the branches from local machine to remote github
+   git push origin --all
+
+Jenkins Admin Activity
+==============================
+1 Open the dashboard of Jenkins
+
+2 Click on New item---->Enter item name as MultBranchPipeline
+
+3 Select MultiBranchPipeline--->OK
+
+4 Go to Branch Sounrces---->Select Git-->enter github url where developers
+  uploaded the code
+
+5 Go to Scan Multi branch pipeline triggers---->Select 1 minute
+
+6 Apply--->Save
+==================================================================
+=======================================================================
+Webhooks 
+===========
+This is  used to send notifications from github to jenkins
+Whenever any code changes are done and that is checkdin into
+github, webhook will send an immediate notifiction ot JEnkins
+and Jenkins will triggern the job
+
+1 Open github.com---->Click on the reposiotry that we are working on
+2 On the right corner clikc on Setting
+3 Click on Webhooks in the left pannel
+4 Click on Add Webhook
+5 In Payload URL: http://public_ip_jenkinsserver:8080/github-webhook/
+6 In Content type select :application/json
+7 Click on Add Webhook
+8 Open the dashboaard of Jenkins
+9 Go to the job that we want to configure
+10 Go to Build triggers
+11 Check GitHub hook trigger for GITScm polling
+12 Click on Apply--->Save
+   Now if we make any changes to the code in github then github
+  will send an notification to jenkins and jenkins will run that job
+
+
+=================================================================================
+Day 9
+================================================================================
+
+Master Slave if Jenkins is installed as a permanant installation
+=======================================================================
+
+Setups of jenkins as a direct installation
+-------------------------------------------------
+1 Update the apt repository
+  sudo apt-get update
+
+2 Install java
+  sudo apt-get install -y openjdk-8-jdk
+
+3 Add the jenkins repository keys to the apt repository
+  wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key 
+                                                        | sudo apt-key add -
+
+4 Add the debain package address to jenkins.list file
+  sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
+                                        /etc/apt/sources.list.d/jenkins.list'
+
+5 Update the apt repository
+  sudo apt-get update
+
+6 Install jenkins
+  sudo apt-get install -y jenkins
+
+--------------------------------------------------------------------------
+Setup
+============
+1 Create a new AWS ubuntu20 instance
+
+2 Install the same version of java as present in the master
+  sudo apt-get update
+  sudo apt-get install -y openjdk-8-jdk
+
+3 Setup passwordless SSH betwen Master and slave
+  a) Connect to slave and set password to default user
+     sudo passwd ubuntu
+  b) Edit the ssh config file
+     sudo vim /etc/ssh/sshd_config
+     Search for "PasswordAuthentication" and change it from no to yes
+  c) Restart ssh
+     sudo service ssh restart
+  d) Connect to Master using git bash
+  f) Switch to JEnkins user
+     sudo su - jenkins
+  e) Generate the ssh keys
+     ssh-keygen
+  f) Copy the ssh keys
+     ssh-copy-id ubuntu@private_ip_of_slave
+     This will copy the content of the public keys to a file called
+     "authorised_keys" on the slave machine
+
+
+===========================================================================
+  Connect to slave using git bash
+4 Downlaod the slave.jar file
+  wget http://private_ip_of_jenkinsserver:8080/jnlpJars/slave.jar
+
+5 Give execute permissions to others on the slave.jar
+  chmod o+x slave.jar
+
+6 Create an empty folder that will be the workspace of jenkins
+  mkdir workspace
+
+7 Give execute permissions to others on this directory
+  chmod o+w workspace
+
+7 Open the dashboard of Jenkins
+  
+8 Click on Manage Jenkins--->Click on Manage Nodes and Clouds
+
+9 Click on New node---->Enter some node name as Slave1
+
+10 Select Permanant Agent--->OK
+
+12 Enter remote root directory as /home/ubuntu/workspace
+
+13 Labels: myslave (This label is associated with a job in jenkins
+   and then that job will run on that slave)
+
+14 Go to Launch Method and select "Launch agent via execution of command on master"
+
+15 Click on Save
+
+16 Go to the dashboard of Jenkins
+
+17 Go to the job that we want to run on slave---->Click on Configure
+
+18 Go to General section
+
+19 Check restrict where this project can be run
+
+20 Enter slave label as myslave
+
+
+=================================================================================
+Cat Light Notifications
+---------------------------------
+Catlight is a third party s/w that is used to get notification from
+Jenkins in the form of pop up msgs
+Catlight is a client side s/w and it has to be installed on every
+team members machines
+
+1 Download and install cat light
+  https://catlight.io/downloads
+
+2 Select the continuous integration tool as Jenkins
+
+3 Enter the public ip_of_jenkinserver:8080
+
+5 Enter the username and password of Jenkins
+
+6 Select the jobs for which we want notifications
+
+===============================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

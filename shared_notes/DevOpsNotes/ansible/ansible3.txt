@@ -1,0 +1,101 @@
+Copy module can also be used for changing the ownership,group ownership and permissions on the file that is copied into the managed nodes
+
+ansible all -m copy -a 'src=file1 dest=/home/vagrant owner=root
+group=root mode=777' -b
+
+We can also copy content into a file using copy module
+ansible all -m copy -a 'content="Hello Intelliq \n"                                dest=/home/vagrant/myinventory'
+
+FileModule
+This is used for creating files or directories on the managed nodes.We can also change the ownership,group ownership and permission of the files created on the managed nodes
+
+To create a file we can use state=touch
+
+Ansible to create a file called intelliqfile on all the managed hosts
+ ansible all -m file -a 'name=intelliqfile dest=/home/vagrant                                                 state=touch' -b
+
+To create a directory we can use state=directory
+Ansible command to create a directory on all the manage hosts
+ ansible all -m file -a 'name=intelliqdir dest=/home/vagrant                                            state=directory' -b
+
+We can also create complete folder structure on the managed hosts
+ansible all -m file -a 'name=d1/d2/d3/d4/d5  dest=/home/vagrant                                             state=directory' -b
+
+
+To control the ownership and group ownership and also the permissions on that file
+ansible all -m file -a 'name=intelliqfile dest=/home/vagrant          state=touch owner=vagrant group=intelliq mode=000' -b
+
+
+To recursively change the ownership groupownership and permissions from d3 folder to all its subfolders and files
+ansible all -m file -a 'name=d1/d2/d3  dest=/home/vagrant       state=directory owner=intelliq group=intelliq mode=777                                                recurse=yes' -b
+
+
+APT Module
+==============
+This is used for installaing or unistalling packages on the managed hosts
+
+Ansible command to install tree on all manged hosts after
+ upgrading the apt repository
+ ansible all -m apt -a 'name=tree state=present                                                            update_cache=yes' -b
+
+Ansible commna dto install apache2 on one machine
+ansible 192.168.60.12 -m apt -a 'name=apache2 state=present' -b
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

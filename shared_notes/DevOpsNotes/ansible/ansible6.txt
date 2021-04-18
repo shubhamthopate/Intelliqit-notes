@@ -1,0 +1,211 @@
+Variables in Ansible
+======================
+These are classified into 3 types
+1 Global Scope
+2 Play Scope
+3 HostScope
+
+Global Scope are declared at the command prompt and they 
+can effect all the plays in the complete playbook
+
+PlayScope variables are declared at the level of individual
+plays and they will work on only a single play
+
+Host Scope variables defined to work on a group of hosts
+or on a single host as given in the inventory file
+
+Global Scope variables
+---------------------------
+UseCase
+Create a playbook which can be used for installing or
+unistalling paakcges
+vim playbooks6.yml
+Go into insert mode by pressing 'i'
+
+---
+- name: Installing or uninstalling packages
+  hosts: all
+  tasks:
+   - name: Installing/uninstalling
+     apt:
+      name: "{{a}}"
+      state: "{{b}}"
+      update_cache: "{{c}}"
+...
+Save and quit(Esc :wq)
+
+To run the above playbook for installing tree
+ansible-playbook playbook6.yml --extra-vars "a=tree b=present c=no" -b
+
+We can also use it for uninstalling git
+ansible-playbook playbook6.yml --extra-vars "a=git b=absent c=yes" -b
+UseCase
+Create a playbook for creating directories or file and also controlling the ownership permissions etc
+
+vim playbook7.yml
+Go into insert mode by pressing  'i'
+---
+- name: Creating files/directories changing perm etc
+  hosts: all
+  tasks:
+   - name: create file/dir
+     file:
+      name: "{{a}}"
+      state: "{{b}}"
+      owner: "{{c}}"
+      group: "{{d}}"
+      mode: "{{e}}"
+...
+Save and quit (Esc :wq)
+To create a directory with the above play book
+ansible-playbook playbook7.yml --extra-vars "a=/home/vagrant/d1 b=directory c=intelliq d=root e=777"                                                         -b
+
+to create a file using the same playbook
+ ansible-playbook playbook7.yml --extra-vars "a=/home/vagrant/d1/file1 b=touch c=vagrant d=intelliq                                                  e=000" -b
+
+Playscope variable
+UseCase
+Create a playbook for installing apache2 using playscope
+varaible.The same playbook should be capable of working
+on installation or uinstallation of other packages
+
+vim playbokk8.yml
+Go into insert mode by pressing 'i'
+---
+- name: Installing apahce2
+  hosts: all
+  vars:
+   a: apache2
+   b: present
+   c: no
+  tasks:
+   - name: Apache installation
+     apt:
+      name: "{{a}}"
+      state: "{{b}}"
+      update_cache: "{{c}}"
+...
+Save and quit(Esc :wq)
+
+To run tha above playbook
+ansible-playbook playbook8.yml -b
+It will install apache2
+
+The above playbook works as a template whose default behaviour is installing apache but we can make the same playbook to install any oher package instead of apache2
+by passing the values as global scope
+
+ansible-playbook playbook8.yml --extra-vars "a=git b=absent c=no" -b
+
+Order of presendence
+----------------------
+Global scope variables are given the higgest priority
+Host Scope variables have next level of priority
+Play scope variables are given the least priority
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

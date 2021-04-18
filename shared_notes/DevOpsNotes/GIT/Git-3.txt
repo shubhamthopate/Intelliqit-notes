@@ -1,0 +1,95 @@
+
+Git Branching
+====================
+	This is a feature of git using which the developers
+can create seperate functionalities of code on different branches and later merge them with the master branch.This will help in creating the code in an unclutterred way
+
+1 To see the list of all branches
+  git branch
+  To see all branches(local and remote)
+  git branch -a
+
+2 To create a branch
+  git branch branchname
+
+3 To move into a branch
+  git checkout branchname
+
+4 To create a branch and also move into it
+  git checkout -b branchname
+
+5 To merge a brnach with master
+  First move to master
+  git checkout master
+  git merge branchname
+
+6 To delete a branch that is merged
+  git branch -d branchname
+  This is also called soft delete
+
+7 To delete a branch that is not merged
+  git branch -D branchname
+  This is also called hard delete
+
+
+note: whenever a branch is created whatever is the commit history of the parent branch will be copied to the newly created branch
+
+note: Irrespective of where a file is created or modified that file belongs to that branch form where it is commited
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

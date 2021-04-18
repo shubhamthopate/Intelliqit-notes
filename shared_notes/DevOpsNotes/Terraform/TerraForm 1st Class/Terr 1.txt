@@ -1,0 +1,59 @@
+INSTALLING TERRAFORM ON WINDOWS:
+
+1) Goto below url
+  https://www.terraform.io/downloads.html
+2)  Click on Windows 32 bit
+3) Unzip the step 2 file keep it in any directory
+    ex: (c:/testterraform)
+4) Add step3 directory Location(c:/testterraform) to
+    System Variables
+	a) Goto my computer
+	b) Click on Properties
+	c) Click on "Advanced System settings"
+	d) Click on "Environment Variables"
+	e) Goto "System Variables" section
+    f) select "path" Variables
+    g) Click on edit 	
+	h) click on new
+	g) Paste step directory location
+5) Open Cmd propmt
+6) run below command
+    terraform --version	
+	
+===================================================
+Imp TERRAFORM Commands:
+========================
+a) terraform plan: Shows us what changes Terraform will make to our infrastructure.
+b) terraform apply: Applies changes to our infrastructure.
+c) terr destroy: Destroys infrastructure built with Terraform.
+
+Connecting to AWS Account using Terraform:
+==========================================
+1) By using AWS Account access key secret access key 
+we can conect to AWS Account.
+2) Navgation to Create AWS Root count user access & secret
+key
+     a) Login into AWS Account
+	 b) Click on Accountnumber/Account Name (^)
+	 c) click on "My Security Credentials"
+	 d) Click on "Access keys"
+	 e) Click on "Create New Access key"
+	 f) Download the file
+
+Terraform resorces: 
+================== 
+a) It will create resources.
+b) Each provider is having its own resource types. 
+c) You can find all AWS resource from
+   below url.
+   
+   https://www.terraform.io/docs/providers/aws/
+   
+   ex: 
+    aws_instance
+	aws_ebs_volume
+	aws_snapshot
+	aws_vpc
+	
+
+

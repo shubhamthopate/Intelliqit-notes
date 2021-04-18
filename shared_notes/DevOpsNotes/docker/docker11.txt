@@ -1,0 +1,144 @@
+Create 2 networks intelliq1 and intelliq2
+Create 3 busybox containers c,c2 and c3
+c1 and c2 should run on intelliq1 network so they will be able to ping each other
+c3 should be created on intelliq2 network and it shoule not be able to ping to c1 andc2
+Now connect c2 to intelliq2 network..ie c2 is running on both intelliq1 and intelliq2 networks
+c2 should be able to ping to c1 and c3 but c1 should not be bale to ping to c3
+
+docker network create intelliq1
+docker network create intelliq2
+docker run --name c1 -it --network intelliq1 busybox
+Come out of c1 container without exit(Ctrl + p,ctrl+q)
+docker run --name c2 -it --network intelliq1 busybox
+In c2 container
+ ping ipadress-of-c1-container :It should ping
+Come out of c2 container without exit(Ctrl + p,ctrl+q)
+docker run --name c3 -it --network intelliq2 busybox
+In c3 container
+  ping padress-of-c1-container :It should not ping
+  ping padress-of-c2-container :It should not ping
+docker network connect intelliq2 c2
+docker attach c2
+In c2 container
+ ping ipadress-of-c1-container :It should ping
+ ping ipadress-of-c3-container :It should ping
+
+
+
+
+
+DockerSwarm
+This is a feature of docker using which we can perform container
+orchestration.In a scenario where we want ot run run 100's of containers
+in a distributed network on multiple docker hosts we can use docker swarm
+Advantages
+---------
+1 We can launch fixed no of container for a single docker image
+2 Perform health checks on containers
+3 Auto scalling of the containers ie icreasing or decreasing the no of
+  containers for a specific service
+4 Performing rolling updates
+5 Start or stop services on multiple containers
+
+Setup of Docker swarm
+1 Create 3 linux vm's and install docker on all of them
+2 Name the 1st machine as manager and the other 2 as worker1 and worker2
+3 Go to the manager machine and create a docker swarm
+  Capture the ip adress of this machine
+
+   docker swarm init --advertise-addr 192.168.62.100
+
+4 In the output of the above command it will display the command to join a worker to the docker swarm
+
+5 Copy that command and paste it in worker1 and worker2
+
+3 To find the list of machines running in docker swarm
+  docker node ls
+
+Creating services in docker swarm
+======================================
+1 Create an nginx service running on 5 containers
+   docker service create --replicas 5  -p 8080:80 --name webserver nginx
+
+2 To find the list of docker hosts on which the above service is running
+  docker service ps webserver
+
+3 We will be able to open the same nginx thorugh the ipadrees
+  of the manger or worker1 or worker2
+  http:192.168.62.100:8080
+  http:192.168.62.200:8080
+  http:10.10.10.10:8080
+
+4 To scale the contianers up or down ie increase the no of container
+  or decrease the no of containers
+  docker service scale webserver=8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

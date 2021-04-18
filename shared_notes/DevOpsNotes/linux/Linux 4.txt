@@ -1,0 +1,65 @@
+Wildcard Characters
+-------------------------
+*   Represents 0 or more unknown characters
+?   Represents 1 unknown character
+[]  Anything given is [] out of that only one 
+    character is taken
+[^] It represents inverse operation ie it will 
+    avoid all characters in []
+
+
+To display all files starting with the word file
+ls file*
+
+To display all files whose name start with f and ends with e
+ls f*e
+
+To remove all files that end with d
+rm *d
+
+To display all files which start with f,second character is 
+unnkown 3,4 characters are le and remaining characters are unknown
+ls f?le*
+
+To display all files that are ending with a number
+ls *[0-9]
+
+To copy all files whose first character is a,b,c,d,e,f
+into a dir called dir1
+cp [abcedf]* dir1/
+
+To move all files whose name doesnot start with abc into dir2
+mv [^abc]* dir2/
+
+To display all files whose 1st char is a,b,c
+2nd char is d,e,f and thrid char is unknown
+ls [abc][def]?
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,59 @@
+Use case
+Start redis:3.0.6 as a service in docker swarm with 3 replicas
+and upgrade the version to 3.0.7.
+Check if the upgrade has effected all the containers on manager
+and worker nodes
+
+ docker service create --replicas 3 --name mydb redis:3.0.6
+
+To update it ot 3.0.7
+docker service update --image redis:3.0.7 mydb
+docker service ps mydb
+
+To rollback redis version
+docker service update --rollback mydb
+docker service ps mydb
+
+To remove a service from docker swarm
+docker service rm mydb
+
+
+Draining a worker
+===================
+The manager can remove a worker from the docker swarm so that it cannot take any further swarm requests
+docker node update --availabilty drain worker1
+
+To reactivate the worker
+docker node update --availablity active worker1
+
+For a worker to leave the swarm
+docker swarm leave
+
+For manager to leave the swarm
+docker swarm leave --force
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

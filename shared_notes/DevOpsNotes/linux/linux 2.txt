@@ -1,0 +1,87 @@
+
+
+1 To copy files
+  cp srcfile destfile
+
+2 to copy directories
+  cp -R srcdir destdir
+
+If the destination file is not present cp will create a new file
+If the destination file is present cp will overwrite the file
+
+3 To rename or move files
+  mv srcfile destfile
+  mv works like cut paste
+
+4 To see the list of all files in present working dir
+  ls
+
+5 To see long listing of files
+  ls -l  (it shows all the meta data realted to the file)
+
+6 To see the files (visible and hidden)
+  ls -a
+
+7 To see the size of the files in human readable format
+  ls -lh
+
+8 To see the inode numbers of the files
+  ls -li
+
+9 To see the files based on their time stamps
+  ls -lt
+
+10 To see the files after reversing the time stamps
+   ie older files first
+  ls -ltr
+
+11 To see the files recursively present in a dir
+   ls -lR
+
+Linking of files
+----------------------
+Linking is of 2 types
+1 Soft link
+2 Hard Link
+
+Soft link is similar to a shortcut in windows.This is created for easy access of the files present at some remote loaction.If the original file is delete the shortcut is of no use
+
+ln -s file1 file2
+file2 is created as a shotcut for file1
+
+Hard link will work even if the original file is deleted
+ln file1 file3
+file3 become hardlink file for file1
+ls -li will display the same inode number for
+both file1 and file3 and the link count will be 2
+even if we delete the original file still we can access the date
+rm file1
+cat file3
+
+
+172.31.45.101
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

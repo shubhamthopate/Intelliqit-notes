@@ -1,0 +1,264 @@
+Data Volumes
+==================
+Containers are for temporary usage.Once a container is destroyes
+all the data created by that container is lost.
+If we want to preserve that data we should save it outside
+the container.This can be done through data volumes
+Data valoumes can be implemented in 2 types
+1 data volumes
+2 data vloume contianers
+
+To implement a datavolume we should first create a directory
+outside the container and mount that directory in the container
+
+UseCase
+--------
+Create a directory called /data.Start an ubuntu container and mount it on the /data folder.Create some files in this /data
+folder fom within the container and check if those are 
+available even after removing the contianer.
+
+1 mkdir /data
+2 docker run -it --name myubuntu -v /data ubunutu
+  In the ubuntu container 
+  ls  we should find data folder
+  cd data
+  create some files in data folder
+  touch file1 file2 file3
+  exit
+3 To find the location where the data created in container
+  is stored
+  docker inspect myubuntu
+  The above command will display detailed info about the   container in json file format
+  Search for "mounts" in that file and it will show the
+  path where /data is saved
+4 remove the container
+  docker rm -f myubuntu
+
+5 cd path_of_data_copied_from_docker_inspectcommand
+6 we will find ALL the files created by the container
+
+Note:
+The data created by the previosly deleted container can be accessed only by the host machine and not other containers
+If we want other containers to access that data we should use
+the concept of datavolume contianers
+
+UseCase
+Create a directory /data .start an ubuntu container and name it
+container1.mount /data on container1.In contianer1 go into data 
+folder and create some files.comeout of the contaienr without exiting
+create another ubuntu container and name it container2.
+container2 shoud use the data volumes of container1
+in container2 go into data folder and create some more files
+comeout of container2 without exiting
+create another ubuntu contaienr call it contaienr3 and this contaienr should use the data volume of contaienr2
+
+1 mkdir /data
+2 docker run -it --name container1 -v /data ubuntu
+  In container1
+  cd data
+  touch file1 file2
+  come out of container1 without exit(ctrl+p,ctrl+q)
+3 docker run -it --name container2 --volumes-from                                           contaienr1 ubuntu
+  In container2
+  cd data
+  touch file3 file4
+  come out of container2 without exit(ctrl+p,ctrl+q)
+4 docker run -it --name container3 --volumes-from                                           contaienr2 ubuntu
+  In container3
+  cd data
+  touch file5 file6
+  come out of container2 without exit(ctrl+p,ctrl+q)
+5 Go into any of the three running containers
+  docker attach container
+  cd data
+  ls
+  we should find all the files created by the three containers
+
+Linking containers
+========================
+This can be done in 3 ways
+1 using --link option in run command
+2 using docker compose
+3 using docker networking
+
+Using --link
+===============
+Usecase
+create 2 busybox containers and name them container1 and container2.Link both of them and check if can ping
+
+1 docker run --name container1 -it busybox
+2 Come out of container1 without exiting(ctrl+p,ctrl+q)
+3 docker run --name container2 -it --link                           container1:container1alias busybox
+4 In container2
+  ping ip_address_of_container1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,175 @@
+Ansible doesnot require any agent software to be installed on our machine.
+Instead it uses passwordless ssh.
+Note:Ansible uses agentless policy
+
+1 Generate ssh keys on the controller machine
+  ssh -keygen
+
+2 Copy the public key into the all the managed hosts
+  ssh-copy-id username@ip-adress-of-managed-host
+
+3 Repeat Step No 2 for all the managed hosts
+
+Ansible performs remote configuration by reading information
+from a file called inventory file.The default inventory file is
+present in /etc/ansible/hosts.
+In this file we should define the ip adress of all the managed hosts that we want ansible to control
+
+sudo vim /etc/ansible/hosts
+Go into insert mode by pressing i
+Enter the ip adresses of all the managed hosts
+192.168.60.12
+192.168.60.13
+192.168.60.14
+192.168.60.15
+Save and quit(Esc :wq)
+
+Ansible uses the following thre modes for remote configuration
+1 Ansible adhoc commands
+2 Ansible playbooks
+3 Ansible roles
+
+Impotant modules in ansible
+1 command : This is used for executing basic linux commands on 	    the remote machines
+2 shell: This is used for executing linux commands which involve
+	 redirection and piping
+3 ping: Used to check if a remote manged host is pingable or not
+4 copy: Used to copy files from controller into managed hosts
+5 fetch: Used to copy files from managed hosts into controller
+6 user: Used for creating users on the managed hosts and for
+        controlling their accounts
+7 file: Used for creating files and directories on the managed
+        hosts
+8 git: Used to automate the checkin and checkout process in
+       git version controlling
+9 apt: Used for installing packages on the ubuntu based linux        machines
+10 yum:Used for installing packages in rhel,oel,centos,fedora 
+11 servcie: Used for starting or stopping services
+12 uri : used to check if a remote url is reachable or not
+13 debug :Used to capture the output of any specific ansible
+ 	  module and display it on the console
+14 ec2: Used for configuring servers on the AWS cloud
+
+
+Adhoc commands
+===============
+Syntax:
+   ansible all/group/ipadress -m modulename -a 'arguments'
+
+UseCase1
+Execute ls -l command on all the manged hosts
+ansible all -m command -a 'ls -l'
+
+UseCase2
+Excecute ls -l command on all the managed nodes and store the output in file1
+ansible all -m shell -a 'ls -l > file1' -b
+
+UseCase3
+Go to all the manged hosts and capture info about all the users who are using /bin/bash from /etc/passwd file and store in file2
+ansible all -m shell -a 'grep /bin/bash /etc/passwd > file2' -b
+
+
+UseCase4
+Copy a file present on the controller into all the managed hosts
+ansible all  -m copy -a 'src=ansbilesample dest=/home/vagrant' 
+We can also copy directories along with all its subdirectories
+and files
+ ansible all -m copy -a 'src=d1 dest=/home/vagrant' -b
+
+
+
+
+
+
+
+
+                                                             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

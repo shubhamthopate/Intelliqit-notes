@@ -1,0 +1,207 @@
+Multiple playbooks can be calle dform one single playbook using "include"
+This helps us in creating playbooks which are more modular
+
+UseCase
+Create an ansible play for installing maven.Call this play from another playbook
+
+vim playbook15.yml
+---
+- name: Installing maven
+  apt:
+   name: maven
+   state: present
+...
+
+vim playbook16.yml
+---
+- name: Calling other playbooks
+  hosts: all
+  tasks:
+   - include:
+      playbooks15.yml
+
+
+Create 4 plays 
+1 for isntalling apache using apt
+2 editing the content of index.html using copy
+3 restaring apache2 using service
+4 checking url is rechable using uri module
+
+vim apache2_installation
+---
+- name: Installing apache2
+  apt:
+   name: apache2
+   state: present
+   update_cache: yes
+...
+
+vim edit_index.html
+---
+- name: editing index.html file
+  copy:
+   content: "Welcome to apache2 home page"
+   dest: /var/www/html/index.html
+...
+
+vim apache2_restart
+---
+- name: Restarting apache2
+  service:
+   name: apache2
+   state: restarted
+...
+
+vim apache2_url_response
+---
+- name: Checking apache2 url response
+  uri:
+   url: "http://192.168.60.22"
+   status: 200
+...
+
+vim apache2_config
+---
+- name: Configuring apache2
+  hosts: 192.168.60.22
+  tasks:
+   - include: "{{item}}"
+     with_items:
+      - apache_installation
+      - edit_index.html
+      - apache2_restart
+      - apache2_url_response
+...
+
+To execute
+ansible-playbook apache2_config -b
+
+
+When conditions
+-----------------
+If we want ot execute a specific task only when
+a particular condition is true then we can use
+"when" conditions
+
+UseCase
+Install tree when a=10
+vim playbook17.yml
+---
+- name: Implementing when
+  hosts: all
+  vars:
+   a: 10
+  tasks:
+   - apt:
+      name: tree
+      state: present
+     when: a==10
+...
+
+
+Debug Module
+--------------
+This module is used displaying the output of any executed module.The results can be captured in a register variable and using debug module display on the screen
+
+
+
+Create an ansible playbook for installing apache2 and capture the results using register
+and display them on the screen using debug module
+
+---
+- name: Using debug and register
+  hosts: 192.168.60.22
+  tasks:
+   - name: Installing apache2
+     apt:
+      name: apache2
+      state: present
+     register: results
+   - name: Displaying the output
+     debug:
+      var: results
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+

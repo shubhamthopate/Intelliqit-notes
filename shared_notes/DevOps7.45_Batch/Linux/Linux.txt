@@ -1,0 +1,216 @@
+
+1 To see the use who is currently logged in
+  whoami
+
+2 To see all the users logged into the linux server
+  who
+
+3 To create directories
+  mkdir dir1
+
+4 To create multiple directories one within another
+  mkdir -p d1/d2/d3/d4
+
+5 To remove an empty directory
+  rmdir dir_name
+
+6 To remove a directory which has files and sub directories
+  rm -r dir_name
+
+7 To move from one dir to another
+  cd dirname
+  Note   . represents current directory
+        .. represents parent directory
+        ~ represents home direcotry of current user
+        Eg: cd ~   will take control to home dir of current user
+
+8 To create files
+  touch file1
+
+9 To create multiple files
+  touch file1 file2 file3
+  Note: touch creates emptyr files.It can also be used for
+  updating the time stamp of files
+
+10 To create files that can store some data
+  cat > filename
+  Enter some data in the file
+  To come out of cat command (ctrl+d) This represents EOF
+
+  a) cat create a new file if the file is already not present
+  b) it will overwrite the content of the exisiting file if
+    file is already present
+
+11 To see the content of a file
+  cat filename
+
+12 To append data to an exisiting file
+   cat >> filename
+   enter some data
+   ctrl+d
+
+13 To remove a file
+   rm filename
+
+
+14 To find home dir of current user
+   echo $HOME
+
+============================================================================
+15 To move from one dir to another
+   cd dir_path
+   Note: . represents current working dir
+        .. represents parent directory
+        cd .. will take us to parent directory
+        cd . will let us remain on the same working directory
+   To goto parent directory 
+   cd  (or) cd ~
+
+====================================================================
+To see the list of all files in present working dir
+  ls
+
+To see long listing of files
+  ls -l  (it shows all the meta data realted to the file)
+
+To see the files (visible and hidden)
+  ls -a
+
+To see the size of the files in human readable format
+  ls -lh
+
+To see the inode numbers of the files
+  ls -li
+
+To see the files based on their time stamps
+  ls -lt
+
+To see the files after reversing the time stamps
+   ie older files first
+  ls -ltr
+
+To see the files recursively present in a dir
+   ls -lR
+
+========================================================================
+
+1 To copy files
+  cp srcfile destfile
+
+2 to copy directories
+  cp -R srcdir destdir
+
+If the destination file is not present cp will create a new file
+If the destination file is present cp will overwrite the file
+
+3 To rename or move files
+  mv srcfile destfile
+  mv works like cut paste
+
+==================================================================
+
+Linking of files
+----------------------
+Linking is of 2 types
+1 Soft link
+2 Hard Link
+
+Soft link is similar to a shortcut in windows.This is created for easy access of the files present at some remote loaction.If the original file is delete the shortcut is of no use
+
+ln -s file1 file2
+file2 is created as a shotcut for file1
+
+Hard link will work even if the original file is deleted
+ln file1 file3
+file3 become hardlink file for file1
+ls -li will display the same inode number for
+both file1 and file3 and the link count will be 2
+even if we delete the original file still we can access the date
+rm file1
+cat file3
+
+================================================================================
+Text Processing Tools
+--------------------------
+1 less
+  This is used to display the text in pagewise format
+  less filename
+
+2 head
+  This will display the top 10 lines of a file
+  head filename
+  To display top 3 lines of a file
+  head -3 filename
+
+3 tail
+  This will display the last 10 lines of a file
+  tail filename
+  To display the last 4 lines of a file
+  tail -4 filename
+
+4 wc 
+  This is used to find the number of lines,words and characters   in a  file 
+  wc filename
+  To find only the no of lines
+  wc -l filename
+  To find only the number of words
+  wc -w filename
+  To find only the number of charactes
+  wc -c filename
+
+5 sort
+  Used for sorting the content of a file.By default it performs    an alphabetical sort
+  sort filename
+  To perform a numeric sort
+  sort -n filename
+  To perfrom a reverse numeric sort
+  sort -nr filename
+
+
+6 grep(globally search for a regular expression and printit)
+  This is used for searching for a sequence of characters in a file.grep will display all the lines where the given string is present
+  To search for a word called intelliq
+  grep intelliq filename
+  To search for intelliq ignoring its case
+  grep -i intelliq filename
+  To search for a word intelliq and also display the line   numbers
+  grep -n intelliq filename
+  To search for all the lines where the word intelliq is not   present
+  grep -v intelliq filename
+
+7 cut(This is used to capture the data in column fashion)
+  To pick 1st and 7th column from /etc/passwd file
+  cut -d ":" -f 1,7 /etc/passwd
+
+
+===========================================================================
+Redirection 
+============================
+> is output redirection
+2> is error redirection
+&> is both redirection
+
+===============================================================================
+Piping
+=============
+Sending output of a command as input to some other command is
+called piping
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

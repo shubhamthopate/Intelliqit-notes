@@ -1,0 +1,199 @@
+
+Version Controlling
+=====================
+This is the process of preserving older and latest
+versions of the code.
+All the developers upload their code into the
+VCS.The VCS's accept the code uploads coming from
+various developers and create one integrated project
+out of those uploads.
+The next time when developers download the code
+from the VCS they will find the code created by the
+entire team.Process of uploading into VCS is called 
+"cehckin" and downloading from VCS is called "checkout"
+
+
+VCS's also preserve the different versions of the code
+so that the developers can swithc between any version
+based on requirement.
+
+VCS's also track who is making what kind of changes
+
+VCS's are of two types
+1 Centralised Version Controlling
+2 Distributred Version Controlling
+
+Centralised Version Controlling
+---------------------------------
+	Here we have a remote server where version
+controlling happens.All the developers checkin their
+code into this central server.
+Eg: SVN(SubVersion)
+
+Distributred Version Controlling
+-----------------------------------
+	Here a local repository is installed on every
+developers machine where version controlling happens
+at the level of the individual developer.Later from
+the LR the code is uploaded to the remote repository
+where version controlling happens at the level of the
+complete team.
+
+
+Installing git on windows
+=============================
+1 Open https://git-scm.com/downloads
+2 Download git for windows--->Install it
+3 Open git bash
+4 Execute the git commands
+
+Installing git on a Linux(Ubuntu)
+======================================
+1 Update the apt-repository
+  sudo apt-get update
+2 Install git
+  sudo apt-get install -y git
+
+To check the version of git
+git --verion
+
+Setting username and email globally for all users
+git config --global user.name "sai krishna"
+git config --global user.email "sai@gmail.com"
+
+To see the list of all default configuration
+git config --global --list
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

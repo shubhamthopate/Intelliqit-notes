@@ -1,0 +1,202 @@
+CI/CD pipeline using Jenkins
+===================================
+Step 1
+   Whenever the developer makes changes to his code he will upload those changes into Git hub.
+Jenkins should detect that modifications have been done to the code and it should downlaod the code
+This can be called continuous download.
+
+Step 2
+   The code that jenkins has downloaded should be converted into a war,ear or exe file using build tools like ANT,MAVEN,MSBuild etc.This can be called continuous build.
+
+Step 3
+   The war/ear file created in the previous step
+should be deployed into application servers(tomcat,jboss etc) in QA environment.This is called continuous deployment
+
+Step 4
+   The testing team might have created some automation testing program(selenium).Jenkins should fire those programs and check if the applications is working correctly or not.This is continuous testing
+
+Step 5
+  Once the testing is passed Jekins should deploy the applciation into the Production environment
+where the client can start accessing it.This is called continuous delivary.
+
+The above 5 step when automated are called as CI/CD
+
+
+
+
+
+
+Step 1 (Continuous Download)
+-------------------------------
+The developers uplaod their code into Git hub and 
+give the url of the Git hub.we download that code through jenkins
+1 Open the dashboard of jenkins(localhost:8080)
+2 Click on new item
+3 Enter item name as "Development"
+4 Click on Free style project-->OK
+5 goto the dsahboard of jenkins
+6 Click on Manage Jenkins-->Manage Plugins
+7 Click on Available section
+8 Search for "git hub" plugin-->Install it
+9 Go to the dashboard of jenkins
+10 Go to the development job we created
+11 click on doward facing arrow-->Configure
+12 Go to Source code management-->Click on Git
+13 enter the github url provided by developers
+   https://github.com/selenium-saikrishna/maven.git
+14 click on Apply-->Save
+Note:Git should be installed on our machine
+and the path of git.exe should be specified in jenkins
+   Open c-->program files-->git-->bin-->copy the path of git.exe
+Go to dashboard of jenkins
+Click on Manage jenkins-->Global tools configurations
+go to git location-->Give it some name and paste the
+path of Git.exe-->Apply-->Save
+
+
+Step 2 (Continuous Build)
+---------------------------
+1 Open the dashboard of jenkins
+2 Go to the Development job we created
+3 Click on downward arrow-->Configure
+4 Go to Build section-->Add Build step
+5 Click on Invoke top level maven targets
+6 enter the targets as   (clean pacakage)
+7 Click on apply-->Save
+
+
+Step 3 (Continuous Deployment)
+---------------------------------
+1 Open the dashboard of jenkins
+2 Click on Manage Jenkins-->Manage Plugins
+3 Go to Available tab-->Search for "Deploy to   container" plugin
+4 Install it
+5 Go the dashboard of jenkins
+6 Go to the development job we created-->Click on
+  configure
+7 Go to post build actions-->Click on Add post build   action-->click on deploy war/ear to container
+8 Enter tomcat credentilas-->apply-->save
+
+Configuring tomcat
+====================
+1 Download tomcat 7 from 
+  https://tomcat.apache.org/download-70.cgi
+2 Extract it and open it-->open the conf folder
+  open server.xml file-->Search for "connector port"
+  and change the port no from 8080 to 8899
+  Open tomcat-users.xml
+  add the below statement
+  <user username="admin" password="admin"                            roles="manager-script"/>
+3 Open the bin folder in tomcat
+4 click on startup.bat file
+
+We should be able to access the home page of tomcat
+from any browser(localhost:8899)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

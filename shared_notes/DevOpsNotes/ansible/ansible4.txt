@@ -1,0 +1,190 @@
+Configuring ansible on AWS
+=============================
+1 Create 2 or more aws instances(Ubuntu14)
+2 Name the 1st instance as controller
+  and other instances as server1,2,3,etc
+3 Open the terminal of controller machine   through git
+4 Install ansible
+5 Create a user called ansible
+  sudo useradd -m ansible
+6 Assign password for that user
+  sudo passwd ansible
+
+7 Open another gitbash and go to server1
+8 sudo vim  /etc/ssh/sshd_config
+  Search for passwordauthentication and
+  change it from no to yes
+9 Restart ssh service
+  sudo service ssh restart
+10 Reset passwd for ubuntu user
+   sudo passwd ubuntu
+
+Repeat Step-7-10 on all the managed hosts
+
+11 Go to controller machine
+13 sudo vim /etc/ansible/hosts
+   Enter tie private ips of all the managed    hosts
+
+14 sudo su - ansible
+15 ssh-keygen
+16 ssh-copy-id ubuntu@private-ip-of-mangedhost
+Repeat step 16 for all manged host ip adresses
+
+Playbooks
+===========
+The adhoc commands that we have used till now can work only on one module and one set of arguments.
+
+To perform complex configuration management activites we can use ansible playbooks
+Playbooks are created in yml syntax and they are useful for running multiple ansible modules
+with different set of arguments
+
+Using playbooks it is possible to convert complex CM tasks into easily repetable routines
+
+Create an ansible playbook for crearing directory on all the manged hosts and copying a file into that directoy
+
+vim playbook1.yml
+Go into insert mode by pressing i
+
+---
+- name: Creating dirs and coping files
+  hosts: all
+  tasks:
+   - name: create directory
+     file:
+      name: /home/ubuntu/dir1
+      state: directory
+   - name: copy file
+     copy:
+      src: /home/ansible/file1
+      dest: /home/ubuntu/dir1
+...
+
+Save and quit (Esc :wq)
+
+To check the syntax of the above playbook
+ansible-playbook playbook1.yml --syntax-check
+
+To run the above playbook
+ansible-playbook playbook1.yml
+
+Create an ansible playbook for creating a user
+called intelliq on all the manged hosts and capture the user info from /etc/passwd file
+
+vim playbook2.yml
+Go into insertmode by pressing 'i'
+
+---
+- name: Creating users and capturing their info
+  hosts: all
+  tasks:
+   - name: User Creation
+     user:
+      name: intelliq
+      password: mypassword
+      home: /home/ansible
+      shell: /bin/bash
+   - name: Capture intelliq info from /etc/passwd
+     shell: grep intelliq /etc/passwd > file1
+   - name: Fetching file1 into controller
+     fetch:
+      src: /home/ubuntu/file1
+      dest: /home/ansible
+
+
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

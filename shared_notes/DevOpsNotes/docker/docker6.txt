@@ -1,0 +1,66 @@
+UseCase
+============
+Creating a develomnent environment
+1 Start a mysql container and name it mydb.Start a wordpress container and name mywordpress.Link wordpress with mysql db.
+The developer should be able to launch the worpress
+and create a sample website
+
+docker run --name mydb                        -e MYSQL_ROOT_PASSWORD=intelliq  -d mysql
+
+docker run --name mywordpress --link mydb:mysql 
+                          -p 8080:80 -d wordpress
+
+Launch any browser
+localhost:8080
+Install wordpress and create a sample website
+
+Implementing CI-CD using docker
+Start a jenkins container and name it jenkinsserver
+start 2 tomcat container and name them qaserver and
+prodserver.Link both these tomcat containers with jenkins server.Implement ci-cd
+
+docker run -p 8080:8080 -p 50000:50000 
+                  --name jenkinsserver -d jenkins
+
+docker run -p 8888:8080 --name qaserver -d 
+              --link jenkinsserver:jenkins tomcat
+
+docker run -p 9999:8080 --name prodserver -d 
+              --link jenkinsserver:jenkins tomcat
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

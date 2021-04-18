@@ -1,0 +1,21 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+config.ssh.insert_key = false
+config.vm.provider :virtualbox do |vb|
+vb.customize ["modifyvm", :id, "--memory", "1024"]
+ end
+
+ # manager
+ config.vm.define "Slave1" do |app|
+ app.vm.hostname = "Slave"
+ app.vm.box = "ubuntu/trusty64"
+ app.vm.network :private_network, ip: "10.10.10.24"
+ end
+ 
+ 
+ 
+ end

@@ -1,0 +1,216 @@
+
+CI-CD through Jenkins
+==========================
+
+Step 1: 
+	Whenerver developers perform any modifications to the code present in Git hub,immediately jenkins
+should downlaod that code.This can be called continuous download
+
+Step 2:
+	Jenkins now perform a build process on the code downloaded from git hub.It will take the help
+of plugins like Ant plugin,Maven plugin and create an artifact (jar,war,ear) from the code.This is called
+continuous build
+
+Step 3:
+	Jenkins will deploy the artifact created in the previous step into any application server(tomcat,jboss
+glassfish) running in the QA Environment.This can be called continuous deployment
+
+Step 4:
+	Jenkins now download the automation testing programs that are created by the testing team from Git hub
+And it run these programs on the application that has been deployed into the QA environmet.This can be called continuous testing
+
+Step 5:
+	Once the testing is cleared Jenkins will deploy the application on the production servers,where the
+client can start accesing the application.This can be called continuous delivary.
+
+Step1:Downloading the code from Github
+-----------------------------------------
+1 Open the dashboard of jenkins (localhost:8080)
+2 Click on Manage Jenkins-->Manage Plugins-->Available tab-->Search for Github plugin-->Install it
+3 Click on Manage Jenkins-->Global tools configurations-->Go to git section-->Give some name for git
+  copy the path of git.exe from program files and paste it
+  C:\Program Files\Git\bin\git.exe
+4 Go to the dash board of jenkins
+5 Create a new job-->give job name as "Development"-->Click on Freestyle project-->OK
+6 Go to Source code management-->Click on Git-->enter the url of the Github repo where developers have
+  uploaded their code
+  https://github.com/selenium-saikrishna/maven.git
+7 Click on Apply-->Save
+8 Go to the dashboard of Jenkins-->go to development job we created-->Click on Build icon
+
+Step2:Creating an artifact(war) using the above downloaded code.
+-----------------------------------------------------------------------
+1 Open the dashboard of Jenkins
+2 Click on Manage Jenkins-->Manage Plugins-->Available tab-->Search for Maven Integration plugin-->Install it
+3 Go to the dashboard of Jenkins-->Go to the "Development" job we create-->Click on Dowwar facing aRROW
+  click on configure-->Go to Build section-->Click on Add build step-->Click on Invoke top levelMaven targets
+  and enter clean package
+            -------------
+4 Click on Apply-->Save.
+5 Go to dashboard of Jenkins-->Go to development job-->Click on Build icon
+  It should download the changes of code from git hub and build a war file.
+
+
+
+Step 3:Deploying the war file created in the previous step into tomcat container in QA env
+--------------------------------------------------------------------------------------------
+1 Download tomcat7 from
+  https://tomcat.apache.org/download-70.cgi
+2 Open tomcat folder-->open conf folder-->Edit server.xml file
+  In this file search for "connector port" and change it from 8080 to 8899
+3 Open the bin folder in tomcat folder and double click on startup.batch file
+4 Once tomcat is up and running we should be able to see it home page 
+  launch any browser(localhost:8899)
+5 Open the dash board of Jenkins(localhost:8080)
+6 Click on Manage Jenkins-->Manage Plugin-->Go to available section-->Search for "Deploy to container" plugin
+7 Install it
+8 Go to the dash board of Jenkins-->Go to the development job that we created in previos steps
+9 click on downlaod arrow-->Click on configure
+10 Go to post build actions-->click on add post build action-->deploy war/ear to container
+11 warearfiles----**/*.war
+12 context path----qaenv
+13 Enter the tomcat credentials(Open the tomcat folder-->open conf folder-->tomcat-users.xml file)
+   add the below statement in that file
+   <user roles="manager-script" password="admin" username="admin"/>
+14 Enter tha above username and password in jenkins 
+15 enter tomcat url(http://localhost:8899)
+16 Click on apply-->click save
+
+Step 4:Download the testing code from git and run it on the application that we deployed into tomcat
+       in the previous step
+-------------------------------------------------------------------------------------------------------
+1 Open the dashboard of Jenkins
+2 Create new item-->Give item name as "Testing"-->Select free style project-->ok
+3 Go to Source code management-->Click on git-->Entee the git url provided by testing team
+  https://github.com/selenium-saikrishna/testing.git
+4 Go to build section-->click on add build step-->click on execute windows bacth command
+5 java -jar target/testing.jar
+6 Click on aply-->save
+
+
+Note :To link the development job with the testing job
+1 Open the dashboard of jenkins-->go to the develoment job-->Click on downward arrow-->Configure
+  Go to post build actions-->click on add post build action-->Click on build another job-->enter job name as
+  testing-->apply-->save
+
+Step 5: Deployin the war file into prod environment once it passes testing in the previosu step
+--------------------------------------------------------------------------------------------------
+1 The war file created in the development job should become available to the testing job
+  so that it can deploy into prod environment.This can be done using a plugin call "Copy Artifact plugin"
+2 Open the dashboard of jenkins
+3 Click on manage jenkins
+4 Click on mange plugin
+5 click on Available
+6 search for copy artifact plugin--->Install it
+7 Go to the dashboard of jenkins-->Go to the development job-->Click on downward arrow-->Configure
+8 Go to post build actions-->click on Add Post build actions-->Click on Archive the artifacts
+9 In Files to archive section ---- **/*.war
+10 Apply-->Save
+11 Go to the dashboard of jenkins-->Go to the testing job-->Click on downward arrow-->Configure
+12 Go to build section-->Click on add build step-->copy artifacts from another project
+13 In Project name section---Development
+14 Go to post build action-->Add post build actions-->Deploy war ear to container
+15 War/ear ---- **/*.war
+   context path----prodenv
+   Ente tthe tomcat 7 credentials and location of tomcat(localhost:8899)
+16 Click on Apply-->Save
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	

@@ -1,0 +1,159 @@
+
+
+Working on Git remote repository("github")
+1 Open github.com
+2 Signup for a free account
+3 Signin into that account
+
+To push the code from the local repository to remote repository
+================================================================1 Signin into github.com
+2 Click on + on top right corner
+3 click on New repository
+4 give some name for repository
+5 Select public--->Click on Create repository
+6 Go to "Push an exisiting repository from command line"
+7 Copy the 1st command and paste in gitbash
+  This will create a link between the local repository
+  and the remote repository
+8 Copy the second command and paste in gitbash
+  Enter username and password of github
+This process is called checkin
+
+
+
+
+Downloading from remote git repository
+---------------------------------------
+This can be done in 3 ways
+1 git clone
+2 git fetch
+3 git pull
+
+git clone: This will download the entire remote repository
+from git hub into individual developers machine irresepective of whether that code is already present or not
+Syntax
+  git clone remote_repo_url
+
+git fetch: This will work only when there are modifications in the code between the local repository and remote repository
+git fetch will download the modified files and place them on a remote branch.We can go to that remote branch check if those changes are accptable or not and if they are acceptable we can merge them with master
+
+1 Create some modifications to any file on github
+  Open github.com
+  Click on our remote repository
+  click on any file that we want to modify
+  Click on Edit icon
+  Make some changes--->click on commit changes
+
+2 In git bash
+  git fetch
+
+3 Check the modified file on master branch
+  We will not see any modifications
+
+4 The modifications will be on the remote branch
+  Move to the remote branch
+  git branch -a
+  git checkout -b remotes/origin/master
+
+5 View the modified file
+  If the changes are accpetable merge with master
+  git checkout master
+  git merge remotes/origin/master
+
+
+git pull:This will also work only when there are modifications
+between the local repository and the remote repository.But it will directly merge the modified files with master branch
+
+1 Open github.com
+2 Make some changes to a file--->commit changes
+3 In git bash
+  git pull
+The modified files can be directly seen on the master
+
+
+172.31.84.215
+172.31.87.185
+172.31.87.143
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

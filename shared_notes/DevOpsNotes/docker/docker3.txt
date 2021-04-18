@@ -1,0 +1,107 @@
+UseCase1
+Start a ninginx container,run in detached mode(deamon),give it a name webserver and it should run on external port 8080 and
+internal port 80
+
+    docker run -d --name webserver -p 8080:80 nginx
+
+The above commands checks for nginx in our machine(dockerhost).if it is present it will start it.if it isnot present it will download from docker hub and start it it as a container
+it will assign a name webserver and also run it in detachedmode ie as a deamon.
+external port 8080 of the host machine is mapped with internal port 80 of the container
+
+To see the home page of the docker container
+launch any browser
+localhost:8080
+
+
+Start a httpd container,run in detached mode(deamon),give it a name mywebserver and it should run on external port 9090 and internal port 80
+
+docker run --name mywebserver -p 9090:80 -d httpd
+
+
+start an ubuntu container and name it myubuntu.go into the ubuntu containers terminal and fire some linux commands.exit form the container
+
+docker run --name myubuntu -it ubuntu
+In the container fire linux commands ls etc
+exit
+
+Start mysql as a container.use exec and go into the bash shell of the mysql container..login into the mysql db
+and create some tables
+docker run -d -p 3308:3306 -e      MYSQL_ROOT_PASSWORD=intelliq --name mydb  mysql
+
+To go into the running mysql container
+  docker exec --it mydb bash
+In the container shell to login into db
+mysql -u root -p
+enter password
+
+Fire sql queries
+show databases;
+use sys;
+Create emp and dept table by copying the code from
+ https://justinsomnia.org/2009/04/the-emp-and-dept-                                     tables-for-mysql/
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,118 @@
+UseCase
+1 Install apache2 on one managed host
+2 Edit the content of index.html file
+3 Restart apache2
+4 Check whether url is responding or not
+
+vim playbook3.yml
+Go into insert mode by pressing 'i'
+
+---
+- name: Configuring apache2
+  hosts: 192.168.60.14
+  become: yes
+  tasks:
+   - name: Installing apache2
+     apt:
+      name: apache2
+      state: present
+   - name: Edit index.html file
+     copy:
+      content: "Hi This is the home page of IntelliQ"
+      dest: /var/www/html/index.html
+   - name: Restart apache2
+     service:
+      name: apache2
+      state: restarted
+   - name: Checking url response
+     uri:
+      url: http://192.168.60.14
+      status: 200   
+...
+
+UseCase
+Create a playbook for copying file from one managed host
+to another managed host
+
+---
+- hosts: 192.168.60.22
+  tasks:
+   - name: Fetch file from 1st managed node
+     fetch:
+      src: /home/vagrant/file1
+      dest: /home/vagrant
+- hosts: 192.168.60.23
+  tasks:
+   - name: Sending file from controller to managenode2
+     copy:
+      src: /home/vagrant/192.168.60.22/home/vagrant/file1
+      dest: /home/vagrant
+
+
+...
+
+
+UseCase
+1 Install git on all managed hosts
+2 Create a new directory on all the managed hosts
+3 Clone a git rpository into that directory
+
+vim playbook5.yml
+Go into isnert mode by pressing 'i'
+---
+- name: Working on Git
+  hosts: all
+  tasks:
+   - name: Installing git
+     apt:
+      name: git
+      state: present
+      update_cache: yes
+   - name: Creating a directory
+     file:
+      name: /home/vagrant/git_folder
+      state: directory
+   - name: Cloning Git repo
+     git:
+      dest: /home/vagrant/git_folder
+      repo: https://github.com/selenium-                                 saikrishna/testing.git
+      clone: yes
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         

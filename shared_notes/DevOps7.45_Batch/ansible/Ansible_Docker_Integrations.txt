@@ -1,0 +1,143 @@
+Ansible playbook to install on docker and docker-py
+
+---
+- name: Setup of docker for Ansible
+  hosts: all
+  tasks:
+   - name: Install pip
+     apt:
+      name: python-pip
+      state: present
+      update_cache: yes
+   - name: Download and  install docker and also docker-py
+     shell: "{{item}}"
+     with_items:
+      - curl -fsSL https://get.docker.com -o get-docker.sh
+      - sh get-docker.sh
+      - pip install docker-py
+...
+
+Ansible playbook to start stop and delete a container
+---
+- name: Working on docker containers
+  hosts: all
+  tasks:
+   - name: Start a httpd container
+     docker_container:
+      image: httpd
+      name: h1
+   - name: Stop the httpd container
+     docker_container:
+      name: h1
+      state: stopped
+   - name: Delete the httpd container
+     docker_container:
+      name: h1
+      state: absent
+...
+
+
+Ansible playbook to create 10 nginx containers
+---
+- name: Start 10 nginx contianers on all maanged nodes
+  hosts: all
+  tasks:
+   - name: Create 10 nginx
+     docker_container:
+      image: nginx
+      name: "container{{item}}"
+     with_sequence: count=10
+...
+
+=======================================================
+
+Ansible playbook to implement docker compose on managed nodes
+---
+- name: Implementing docker compose using Ansible
+  hosts: all
+  tasks:
+   - name: Create a mysql container
+     docker_container:
+      name: mydb
+      image: mysql:5
+      env:
+       MYSQL_ROOT_PASSWORD: intelliqit
+
+   - name: Create a wordpress container
+     docker_container:
+      name: wordpress
+      image: wordpress
+      ports:
+       - 5555:80
+      links:
+       - mydb:mysql
+...
+
+
+===========================================================================
+---
+- name: Creating jenkins-tomcat setup for  CI-CD using docker/ansible
+  hosts: all
+  tasks:
+   - name: Create a jenkins contianer
+     docker_container:
+      image: jenkins
+      name: myjenkins
+      ports:
+       - 5050:8080
+
+   - name: Create a tomcat for QAServer and ProdServer
+     docker_container:
+      image: tomcat
+      name: "{{item.a}}"
+      ports:
+       - "{{item.b}}"
+      links:
+       - myjenkins:jenkins
+     with_items:
+      - {a: qaserver,b: "6060:8080"}
+      - {a: prodserver,b: "7070:8080"}
+
+=======================================================================
+---
+- name: Create an ubuntu container and mount a volume
+  hosts: all
+  tasks:
+   - name: Create a ubuntu container
+     docker_container:
+      name: myubuntu
+      image: ubuntu
+      volumes:
+       - /data
+      interactive: yes
+      tty: yes
+======================================================================
+---
+- name: Ansible playbook to Download docker images
+  hosts: all
+  tasks:
+   - name: Docker docker images
+     docker_image:
+      name: "{{item}}"
+     with_items:
+      - httpd
+      - nginx
+      - centos
+      - jenkins
+...
+
+============================================================================
+---
+- name: Login into hub.docker.com and push a customised docker image
+  hosts: 172.31.36.172
+  tasks:
+   - name: Login into docker hub
+     docker_login:
+      username: sai
+      password: sai123
+      email: intelliqit@gmail.com
+   - name: Push the image
+     docker_image:
+      name: intelliqit/ubuntu_july16
+      push: yes
+

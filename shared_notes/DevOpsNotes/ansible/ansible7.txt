@@ -1,0 +1,228 @@
+
+
+
+Working on group of hosts
+------------------------------
+Create directory call group_vars in the same folder where all the playbooks are present.In this folder create file whose name is same as that of the group name in /etc/ansible/hosts file.In this file define the varaible
+
+mkdir group_vars
+cd group_vars
+cat > webserver
+a: apache2
+b: present
+c: no
+ctrl+d to come out of cat command
+
+cd ..   Come back to the folder where all the playbooks are present
+vim playbook9.yml
+Go into insert mode by pressing 'i'
+---
+- name: Using host scope varaibles
+  hosts: webserver
+  tasks:
+   - name: Installing apache2
+     apt:
+      name: "{{a}}"
+      state: "{{b}}"
+      update_cache: "{{c}}"
+
+...
+
+
+
+cd group_vars
+cat > lb
+a: sai
+b: intelliq
+c: /home/vagrant/sai
+d: /bin/bash
+ctrl+d to come out of cat command
+vim playbook10.yml
+---
+- name: UserCreation
+  hosts: lb
+  tasks:
+   - name: Creating users
+     user:
+      name: "{{a}}"
+      password: "{{b}}"
+      home: "{{c}}"
+      shell: "{{d}}"
+...
+
+Working on individual hosts
+-------------------------------
+Create a folder called host_vars in the same folder where all the playbooks are present.In this folder create file whose name should be the same as the ip adress of a machine from inventory file
+
+mkdir host_vars
+cd host_vars
+cat > 192.168.60.22
+a: tree
+b: present
+c: no
+Come out of the file by pressing ctrl+d(EOF)
+
+cd .. Come back to the folder where the playbooks are present
+vim playbook1.yml
+---
+- name: Using host scope variables
+  hosts: 192.168.60.22
+  tasks:
+   - name: installing tree
+     apt:
+      name: "{{a}}"
+      state: "{{b}}"
+      update_cache: "{{c}}"
+
+...
+
+Loops in ansible
+--------------------
+Loops can be implemented in ansible using with_items.
+Using this concept we can send multiple arguments to a single module
+
+UseCase
+Create playbook for installing multiple packages like maven,firewalld,apache2,tree etc
+vim playbook12.yml
+
+---
+- name: Insatlling packages
+  hosts: all
+  tasks:
+   - name: installing softwares
+     apt:
+      name: "{{item}}"
+      state: present
+      update_cache: no
+     with_items:
+      - tree
+      - apache2
+      - firewalld
+...
+
+with_items can also be used to pass multiple values to any ansible module
+UseCase
+Create playbook for installaing or unistalling different packages and for updating or not updating the apt repository
+vim playbook13.yml
+---
+- name: Installing/uninstalling packages
+  hosts: all
+  tasks:
+   - name: installing and uninstalling softwares
+     apt:
+      name: "{{item.a}}"
+      state: "{{item.b}}"
+      update_cache: "{{item.c}}"
+     with_items:
+      - {a: tree,b: present,c: no}
+      - {a: apache2,b: absent,c: yes}
+      - {a: firewalld,b: absent,c: no}
+...
+
+UseCase
+Create a playbook for creating multiple users and also files or directories in those user home directories
+vim playbook14.yml
+---
+- name: Creating users and creating files
+  hosts: all
+  tasks:
+   - name: Creating users
+     user:
+      name: "{{item.a}}"
+      password: "{{item.b}}"
+      home: "{{item.c}}"
+     with_items:
+      - {a: hari,b: intelliq,c: /home/hari}
+      - {a: ravi,b: newpassword,c: /home/ravi}
+   - name: creating files or directories in user home directories
+     file:
+      name: "{{item.a}}"
+      state: "{{item.b}}"
+      mode: "{{item.c}}"
+     with_items:
+      - {a: /home/hari/file1,b: touch,c: 777}
+      - {a: /home/ravi/d1,b: directory,c: 000}
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

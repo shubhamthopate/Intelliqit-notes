@@ -1,0 +1,61 @@
+Docker in Qa environment
+===========================
+Create 3 docker containers which are related to selenium and perform automation testing parallely on multiple browser and os combinations
+
+1 Launch selenium hub container
+docker run -d -P --name selenium-hub                                         selenium/hub
+
+2 Start selenium chrome container and link with
+  selenium-hub container
+  docker run -d -P --link selenium-hub:hub                   selenium/node-chrome-debug
+
+3 Start selenium firefox container and link      with  selenium-hub container
+  docker run -d -P --link selenium-hub:hub                   selenium/node-firefox-debug
+
+
+To view the console of the seleniumhub
+Open any browser
+http://ipadress-of-dockerhost:externalport-of-                          seleniumhub container
+
+To view the gui of the firefox and chrome containers 
+1 Download and install vnc viewer
+2 ipadress-of-dockerhost:externalport-of-                      chromeorfirefox-container
+
+Docker Compose
+===============
+To start multiple containers and link them with each other we have to run multiple docker commands.Instead we can place all the contianers info in one file called as docker comopse file  and when we start this compose file it will start all the containers specified in that file
+
+Installing docker compose
+-----------------------------
+1 Open https://docs.docker.com/compose/install/
+
+2 sudo curl -L https://github.com/docker/compose/releases/download/1.17.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
+3 sudo chmod +x /usr/local/bin/docker-compose
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

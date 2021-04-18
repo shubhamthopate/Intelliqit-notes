@@ -1,0 +1,131 @@
+
+Text Processing Tools
+--------------------------
+1 less
+  This is used to display the text in pagewise format
+  less filename
+
+2 head
+  This will display the top 10 lines of a file
+  head filename
+  To display top 3 lines of a file
+  head -3 filename
+
+3 tail
+  This will display the last 10 lines of a file
+  tail filename
+  To display the last 4 lines of a file
+  tail -4 filename
+
+4 wc 
+  This is used to find the number of lines,words and characters   in a  file 
+  wc filename
+  To find only the no of lines
+  wc -l filename
+  To find only the number of words
+  wc -w filename
+  To find only the number of charactes
+  wc -c filename
+
+5 sort
+  Used for sorting the content of a file.By default it performs    an alphabetical sort
+  sort filename
+  To perform a numeric sort
+  sort -n filename
+  To perfrom a reverse numeric sort
+  sort -nr filename
+
+
+6 grep(globally search for a regular expression and printit)
+  This is used for searching for a sequence of characters in a file.grep will display all the lines where the given string is present
+  To search for a word called intelliq
+  grep intelliq filename
+  To search for intelliq ignoring its case
+  grep -i intelliq filename
+  To search for a word intelliq and also display the line   numbers
+  grep -n intelliq filename
+  To search for all the lines where the word intelliq is not   present
+  grep -v intelliq filename
+
+7 cut(This is used to capture the data in column fashion)
+  To pick 1st and 7th column from /etc/passwd file
+  cut -d ":" -f 1,7 /etc/passwd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

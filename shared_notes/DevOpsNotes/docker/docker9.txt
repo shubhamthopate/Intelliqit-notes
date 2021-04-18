@@ -1,0 +1,160 @@
+Docker file
+This is a text file whcih uses docker commands
+for customising the docker images
+
+Keywords in docker file
+FROM This is used to specify the base image from which we
+     are creating our images
+		
+MAINTAINER The name of the person who is creating this image
+
+CMD Used for firing linux commands when a container starts
+
+ENTRYPOINT  Used to pass arguemtns to CMD in docker file
+
+RUN Used for installing,unistalling or updating softwares
+    in docker images
+	
+COPY Used to copy files from docker host to the container
+
+EXPOSE Used for port mapping ie  exposing internal port of
+       docker to external port of host machine
+	   
+USER Used to specify the the user previlages to run a      
+     contaienr
+	 
+VOLUME Used for attaching external volumes
+
+ENV Used for passing environment variables
+
+Usecase1
+Create docker images from ubuntu and give maintainer name
+as intelliq
+
+vim dockerfile
+FROM ubuntu
+MAINTAINER intelliq
+Save and quit (Esc :wq)
+To build a docker image from the above file
+docker build -t myubuntu
+
+Usecase2
+Docker file to create an ubuntu image and execute a linux command whenever we start the container
+vim dockerfile
+FROM ubuntu
+MAINTAINER intelliq
+CMD ["date"]
+CMD ["ls","-la"]
+Save and quit (Esc :wq)
+To build a docker image from the above file
+docker build -t myubuntu .
+
+Create a docker file for using entry point to display the content of /etc/passwd file when the container starts
+vim dockerfile
+FROM ubuntu
+MAINTAINER intelliq
+ENTRYPOINT ["/bin/cat"]
+CMD ["/etc/passwd"]
+Save and quit (Esc :wq)
+To build a docker image from the above file
+docker build -t myubuntu .
+
+Create an ubuntu image and install git in it
+vim dockerfile
+FROM ubuntu
+MAINTAINER intelliq
+RUN apt-get update
+RUN apt-get install -y git
+Save and quit (Esc :wq)
+To build a docker image from the above file
+docker build -t myubuntu .
+
+
+Create a jenkins image from base image of jenkinsand install git maven
+vim dockerfile
+FROM jenkins
+USER root
+RUN apt-get update
+RUN apt-get install -y maven git
+Save and quit (Esc :wq)
+To build a docker image from the above file
+docker build -t myjenkins .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

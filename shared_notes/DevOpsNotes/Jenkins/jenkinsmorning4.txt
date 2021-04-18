@@ -1,0 +1,27 @@
+Setting the path of java,maven and git
+--------------------------------------------
+1 Open the dashboard of jenkins(192.168.61.11:8080)
+2 Click on Manage Jenkins-->Global tool configuration
+3 Go to JDK section-->Click on jdk installations-->give some name to java--> paste the pasth of java home
+  Note: to find path of java home dir
+  a) open the jenkins linux server terminal
+  b) which java 
+       /usr/bin/java
+  c) readlink -f /usr/bin/java
+  d) copy the path before bin folder and paste in java_home of jenkins(/usr/lib/jvm/java-8-oracle/jre)
+
+4) Go to git section-->give some name to git-->paste the path of git
+   a) which git
+       /usr/bin/git(copy this path and paste in git section of jenkins)
+
+5) Go to maven-->Click on maven installations-->give some name to maven--> paste the pasth of maven home
+   Note: to find path of maven home dir
+  a) open the jenkins linux server terminal
+  b) which mvn 
+       /usr/bin/mvn
+  c) readlink -f /usr/bin/mvn
+  d)copy the path before bin folder and paste in          maven_home of jenkins(/usr/share/maven)
+
+
+
+

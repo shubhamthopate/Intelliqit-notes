@@ -1,0 +1,53 @@
+Distributed builds in jenkins
+--------------------------------
+We can make jenkins run its jobs on multiple linux machines serially or parallely in a distributed network.
+Image a  scenarion where we want ot execute multiple jobs through jenkins..these jobs can be realed to 
+dev activites or testing activites or deploymnet activites.when we run these many jobs through one linux server performace will degrade.We can handle these secenarios through master-slave concept of jenkins
+
+Creating a slave machine
+----------------------------
+1 Go to any other linux machin(not Jenkins server)
+2 Install the same version of java which is present on the jenkins server
+  add-apt-repository ppa:webupd8team/java
+  apt-get update
+  apt-get install oracle-java8-installer
+
+3 Dowload slave.jar from the jenkins server
+  wget http://192.168.61.11:8080/jnlpJars/slave.jar
+
+4 Create a workspace
+  mkdir workspace
+  chmod 777 workspace
+
+5 Open the dashboard of jenkins
+
+6 manage jenkins-->manage nodes-->click on new node-->give nodename and select permeant agent
+
+7 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

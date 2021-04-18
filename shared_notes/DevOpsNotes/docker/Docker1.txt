@@ -1,0 +1,125 @@
+
+Docker
+=============
+It is a platform for implementing containaraization
+
+Virtualization
+=================
+In virtualization we have a bare metal(H/w) on which we install our host os.on this host os we install hypervisor(vmware ,oracle virtual box etc).On the hypervisor we install our guest os
+and on these guest os we can install our applications.The disadvantage of the above is architecture
+is the applications running on guest os has to pass through multiple layers in order to access
+the hardware resources.This will result in downgraded performance of the applications
+
+Containers
+===============
+In docker we have a bare metal on which host os is installed and on the host machine
+we install a s/w called docker engine.on the docker engine we can install any number 
+of docker containers.These containers are not allocated any fixed amount of hardware
+resources.When the containers are running docker engine decides how much hardware should
+be allocated for each container depending on the processes running in the container
+
+Docker performs process isolation and enbles it to run seperately in userspace
+without bothering about the underlying hardware and os.
+
+
+Installing docker on linux
+============================
+1 open http://get.docker.com
+2 Copy the first 2 commands and paste them in a linux terminal
+    curl -fsSL get.docker.com -o get-docker.sh
+    sh get-docker.sh
+
+3 To check the version of docker running on our machine
+    docker --version
+
+Installing docker on windows
+==============================
+1 Open https://docs.docker.com/engine/installation/#supported-platforms
+2 Go to desktops section
+3 Install docker for windows
+
+Note:docker for windows activates an application called HperV.If this hyperv is active it will not allow any virtaulization software to run(vmware,oracle virtual box)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

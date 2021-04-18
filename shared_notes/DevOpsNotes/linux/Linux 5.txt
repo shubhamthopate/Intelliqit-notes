@@ -1,0 +1,109 @@
+Permissions in Linux
+------------------------
+chmod is the command for changing permissions
+
+read - 4
+write - 2
+execute - 1
+
+To give all permissions to user,group and others
+chmod 777 file1
+
+To give all permissions to user,read and execute to group and no permissions to others
+chmod 750 file2
+
+To recursively give permissions to files and subfolder present in a directory
+chmod -R 777 dir_name
+
+Permissions can also be changed using alphabetical notation
+owner  -    u
+group -     g
+others   - o
+
+read  -r
+write  - w
+execute - x
+
++   is used for adding permissions
+- is used for subtracting permsiions
+= is used for assigning permissions
+
+To add excute permissions to owner,remove write to group on file1
+chmod u+x,g-w file1
+
+To remove read permissions to owner,assign only write and execute to group and remove read for others and add execute for others
+chmod u-r,g=wx,o-r+x file2
+
+Creating users
+--------------------
+adduser username
+To check the user info
+cat /etc/passwd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,121 @@
+Customizing docker images
+=============================
+We can create or customize docker images in the following 2 ways
+1 Downlaod a base image and install some softwares in it and
+  save it(commit)
+2 Use dockefile
+
+Use case
+Run ubunutu as a container and name it myubuntu.Go into the containers terminal and install some packages.exit from the container and save it as an image.Use this image for creating more containers and all these new containers should all the software we have installed
+
+docker run --name myubuntu -it ubuntu
+In the ubuntu container
+  apt-get update
+  apt-get install tree maven git
+  exit
+Open hub.docker.com
+Signup for an account-->We will get a docker id(intelliqit)
+To save the container as an image
+docker commit myubuntu intelliqit/updateubuntu
+Now the modified ubuntu has been saved as intelliqit/updateubuntu.
+Whenever we start a container from that image we will find 
+git maven tree pre installed in it
+
+docker run -it intelliqit/updateubuntu
+
+
+Pushing our images into docker hub
+======================================
+1 create an account in hub.docker.com
+2 In docker host(linux machine where we installed docker)
+  docker login
+  enter username
+  enter password
+3 docker push repositoryid/imagename
+  docker push intelliqit/updateubuntu
+
+
+Working on docker private registry
+====================================
+The image that we pushed in the previous scenario can be accessed by anyone using hub.docker.com.
+To create a private registry which can be shared by only our team members we should use an image called "registry"
+
+
+1 Start a container using "registry" image
+  docker run --name intelliqregistry -d -p 5000:5000 registry
+
+2 Downlaod some image
+  docker pull alpine
+
+3 Save this in the local registry
+  docker tag alpine localhost:5000/intelliq-alpine
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

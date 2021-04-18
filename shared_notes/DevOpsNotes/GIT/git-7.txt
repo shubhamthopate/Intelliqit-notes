@@ -1,0 +1,133 @@
+
+
+1 Create a file and send to stagging area
+  touch f1
+  git add .
+
+2 Stash the above file
+  git stash
+
+3 Create a new file and stash it
+  touch f2
+  git stash -u
+
+4 Create few new files and place them in .gitignore
+  Stash .gitignore also
+  touch f3 f4 f5
+  cat > .gitignore
+  f3
+  f4
+  f5
+  Press Ctrl+d to come out of cat command
+
+5 Since f3,f4,f5 are put in .gitignore git status will no longer
+  show them as untracked files but it will show .gitignore as   untracked file.ie further commands of git will send this   .gitignore into stagging area and also in local and remote   repositories.If we want ot avoid that and .gitignore should
+  not be accessed by git
+  git stash -a
+
+Tagging in Git
+==================
+Tags are used for placing bookmarks on commits
+They are to specify info related to who tagged ,when it was tagged and why it was tagged.
+Generally used for releases
+This helps in understanding what are the commits that are related to specific releases
+
+Tags are of two types
+1 Light weight tags
+2 Annoted tags
+
+1 To create a light weight tag
+  git tag tabname
+
+2 To see the list of all the tags 
+  git tag
+
+3 To create an annoted tag 
+  git tag -a tagname -m "some message"
+
+Note: Tags are always created for the latest commit(HEAD)
+
+4 To create tags for an older commit
+  git tag -a tagname -m "message" commit_id
+
+5 To delete a localtag
+  git tag -d tagname
+
+6 To push all tags into github
+  git push --tags
+
+7 To delete tags from the remote github
+  git push origin :tagname
+
+  
+
+
+
+git diff
+------------
+this is used for finding the difference between 2 commits
+or it can be used for finding the difference between
+a commit and a file yet to be commited
+
+
+1 To find diff between 2 commits
+  git diff commit1_id commit2_id
+
+2 To find diff between latest commit and a file
+  git diff HEAD filename
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

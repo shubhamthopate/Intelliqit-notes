@@ -1,0 +1,173 @@
+
+Git when working on the local machine uses three
+sections.
+1 Working directory(workspace)
+2 Stagging Area
+3 Local Repository
+
+Working directory
+--------------------
+	Initially all the files created by the 
+developers are stroed in a folder called working
+directory and these files are initially called
+untracked files.
+
+Stagging Area
+---------------
+	Files from working directory are moved to
+an intermediate memory area called stagging area.
+The files present here are called stagged files.
+
+Local Repository
+------------------
+	All files from stagging area will be moved
+into the local repository and this is where version
+controlling happens.These files are called commited
+ files
+
+1 To initilise the working dir to accept git commands
+  Open git bash
+  cd path_of_working_dir
+  git init
+  The above command will create a hidden folder called
+  .git where it stores some configuration files for 
+  maintianing the local repository
+
+2 To send file from working dir to stagging area
+  git add filename
+  To send multiple files into stagging area
+  git add file1 file2 file3
+  To send all files and fodlers into the stagging area
+  git add .
+  Note  . represents present working directory
+
+3 To unstage files ie bring files back from stagging
+  to untracked section
+  git rm --cached filename
+  (or)
+  git reset filename
+
+4 To send files from stagging to local repository
+  git commit -m "Some commit message"
+
+5 To see the status of the untracked and stagging section
+  git status
+
+6 To see the total commits that are done in LR
+  git log
+  To see the commit history in a simplified format
+  git log --oneline
+
+
+.gitignore
+-------------
+This is a special file where we can store the
+private filenames.Any filename that is mentioned 
+in .gitignore will not longer be accessed by git
+
+1 Create few files
+  touch file1 file2 file3 file4
+
+2 Check the status of git
+  git status
+  It will show all the above 4 files as untracked file
+
+3 Create a hidden file .gitignore and enter the above filenames
+  cat > .gitignore
+  file1
+  file2
+  file3
+  file4
+  To come out of cat command press ctrl+d (EOF)
+
+4 Check the status of git
+  git status
+  It will not longer show the above created four files
+  as untracked
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

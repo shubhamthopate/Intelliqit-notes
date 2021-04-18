@@ -1,0 +1,127 @@
+
+
+git merge and git rebase
+=============================
+git merge: In git merge the commits are inserted into the branch that we are merging exactly at the location that they were 
+created.which means the commits coming from a branch can look like older commits on the master
+
+1 On the master create few commits
+touch f1
+git add .
+git commit -m "a"
+touch f2
+git add .
+git commit -m "b"
+
+2 Create a new branch and create few commits on it
+  git checkout -b sprint-1
+  touch f3
+  git add .
+  git commit -m "c"
+  touch f4
+  git add .
+  git commit -m "d"
+
+3 Move back to master and create few more commits
+  git checkout master
+  touch f5
+  git add .
+  git commit -m "e"
+  touch f6
+  git add .
+  git commit -m "f"
+
+4 Merge sprint-1 with master
+  git merge sprint1
+
+5 Delete sprint-1 branch
+  git branch -d sprint-1
+
+6 Check commit history of master
+  git log -oneline
+
+git rebase: this is used for performing a fastforward merge
+ie the commits coming from the branch are added to the top of the master branch.This is helpful when we want the commits coming from a branch to be reflected as the latest working version of code on master.
+
+1 On the master create few commits
+  touch f1
+  git add .
+  git commit -m "a"
+  touch f2
+  git add .
+  git commit -m "b"
+
+2 Create a new branch and create few commits on it
+  git checkout -b sprint-1
+  touch f3
+  git add .
+  git commit -m "c"
+  touch f4
+  git add .
+  git commit -m "d"
+
+3 Move back to master and create few more commits
+  git checkout master
+  touch f5
+  git add .
+  git commit -m "e"
+  touch f6
+  git add .
+  git commit -m "f"
+
+4 Rebase sprint-1 with master
+  git checkout sprint-1
+  git rebase master
+  git checkout master
+  git merge sprint-1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

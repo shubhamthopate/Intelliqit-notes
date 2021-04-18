@@ -1,0 +1,203 @@
+StatsModule
+--------------
+This is used to find the statistics of a direcotry or file
+We can use it to find if a file or dir is present on a manged host.Similary we can check its permissions,ownership etc
+
+USeCase
+Crea an ansible playbook to chekc if a directory is presnet on a managed host or not.If the directory is present create a file in it
+
+vim palybook19.yml
+---
+- name: Using stats module
+  hosts: 192.168.60.22
+  tasks:
+   - name: Checking if /home/vagrant is present
+     stat:
+      path: /home/vagrant1
+     register: results
+   - name : Displaying output of stat module
+     debug:
+      var: results
+   - name: Creating file
+     file:
+      name: /home/vagrant/file575
+      state: touch
+     when:
+      results.stat.isdir == true
+...
+
+Create a user Ravi on all the managed nodes and assign passwod,home dir etc.If the user is laready present on any managed node donot make any changes to that user account
+
+---
+- name: Use Creation
+  hosts: all
+  tasks:
+   - name: checking home dir of user /home/ravi
+     stat:
+      path: /home/ravi
+     register: results
+   - name: Display output of stat module
+     debug:
+      var: results
+   - name: User Creation
+     user:
+      name: ravi
+      password: abc
+      home: /home/vagrant/ravi
+      shell: /bin/bash
+     when:
+      results.stat.exists == false
+
+Tagging Modules
+-----------------
+The modules in a playbook can be given specific tags(names)
+Using these tags it becomes possible to execute only that particular module rather than executing the entire playbook
+
+UseCase
+Install tree apahce2 and git.tag tree and paach2 but donot tag git installation
+vim playbook21.yml
+---
+- name: Tagging modules
+  hosts: 192.168.60.22
+  tasks:
+   - name: installing tree
+     apt:
+      name: tree
+      state: present
+     tags:
+      tree_installation
+   - name: installing apache
+     apt:
+      name: apache2
+      state: present
+     tags:
+      apache2_installation
+   - name: installing git
+      apt:
+      name: git
+      state: present
+...
+
+To execute all the tagged modules
+ansible-playbook playbokk21.yml --tags=tagged -b
+
+To execute all the untagged modules
+ansible-playbook playbokk21.yml --tags=untagged -b
+
+To execute modules with a specific tag name
+ansible-playbook playbook21.yml --tags=apache2_installation                                                        -b
+
+
+
+Handlers
+------------
+If we want to execute any module only if a previous modules is executed successfully and also it has done some changes we can use handlers
+
+Handlers are used in combination with "notify" keyword
+A successfull module sends its result to notify and based on that the handler gets execute
+
+Handlers are given in allignment with the tasks
+
+Handlers are executed only after all the tasks are execute
+
+If multiple modules call the same handlers multiple time
+the handler will be executed only once
+
+The handlers are executed only in the order that they are given in the handlers section and not in the order that they are called in the tasks section
+
+UseCase
+Install apache2
+Edit index.html file
+If edit is successfull ie (done some changes) restart apache2
+
+vim playbook23.yml
+
+---
+- name: Using handlers
+  hosts: 192.168.60.23
+  tasks:
+   - name: Installing apache2
+     apt:
+      name: apache2
+      state: present
+   - name: Edit index.html
+     copy:
+      content: "Welcome to intelliq"
+      dest: /var/www/html/index.html
+     notify: restart_apache2
+  handlers:
+   - name: restart_apache2
+     service:
+      name: apache2
+      state: restarted
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                
+

@@ -1,0 +1,148 @@
+Installing jenkins on Linux machines
+=========================================
+1 Go to the jenkins server linux machine(username: vagrant password:vagrant)
+2 sudo passwd root
+  enter some root password
+3 su - root
+   enter password for root
+  
+4 Uninstall existing versions of java
+  apt-get purge java*
+
+5 Add java8 to the apt-repository
+  add-apt-repository ppa:webupd8team/java
+ 
+6 Update the apt repository
+  apt-get update
+
+7 Install oracle-java8
+  apt-get install oracle-java8-installer
+
+8 Download jenkins keys and add to apt keys
+  wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
+
+  echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list
+
+9 update apt repository
+  apt-get update
+
+10 install jenkins
+   apt-get install jenkins
+
+11 Install maven and git
+   apt-get install maven git
+
+
+Installing tomcat7 on QAServer and Prod server
+--------------------------------------------------
+1 Login into QAserver or prodserver
+2 switch into root user account
+3 update the apt repository
+  apt-get update
+4 Install tomcat7
+  apt-get install tomcat7
+
+5 Install tomcat-admin
+  apt-get install tomcat7-admin
+
+6 cd /etc/tomcat7
+7 Edit tomcat users.xml file
+  vi tomcat-users.xml
+  Go into insert mode by pressing   i and add the below statement
+  <user username="admin" password="admin"                         roles="manager-script"/>
+  Save and quit (Esc :wq enter)
+
+8 service tomcat7 restart 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

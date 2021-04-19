@@ -7,3 +7,6 @@ error - ansible playbook sytantactical error
 date 19/04/2021
 student name :   +91 79891 23050
 error jenkins master slave setup 
+
+student name: +91 75698 66857
+error: postgres db container creation error

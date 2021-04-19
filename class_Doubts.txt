@@ -1,0 +1,9 @@
+date 17/04/2021
+
+student name - spandana (9949830211)
+error - ansible playbook sytantactical error 
+
+
+date 19/04/2021
+student name : 
+error jenkins master slave setup 

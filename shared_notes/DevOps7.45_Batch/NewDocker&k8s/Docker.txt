@@ -412,8 +412,7 @@ Use Case
 Setup a postgres db and link with adminer container to access db from browser
 
 1 Create a postgres db container
-  docker run --name db -d -e POSTGRES_DB=intelliqit -e POSTGRES_USER=myuser
-                                                 -e POSTGRES_DB=mydb postgres
+ docker run --name mydb -e POSTGRES_DB=intelliqit -e POSTGRES_USER=intelliqit -e  POSTGRES_PASSWORD=mysecretpassword -d postgres
 
 2 Create an adminer container and link witj postgres 
   docker run --name myadminer -d -p 9999:80 --link db:postgres adminer

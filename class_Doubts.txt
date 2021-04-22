@@ -8,5 +8,13 @@ date 19/04/2021
 student name :   +91 79891 23050
 error jenkins master slave setup 
 
+date 20/04
 student name: +91 75698 66857
 error: postgres db container creation error
+ 
+
+date 21/04
+student name neharika  
+jenkins multibranch  ansible password 
+student name sguru 
+jenkins page error 

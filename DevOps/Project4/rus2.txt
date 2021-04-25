@@ -1,0 +1,20 @@
+Setups of jenkins as a direct installation
+-------------------------------------------------
+1 Update the apt repository
+  sudo apt-get update
+
+2 Install java
+  sudo apt-get install -y openjdk-8-jdk
+
+3 Add the jenkins repository keys to the apt repository
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+
+4 Add the debain package address to jenkins.list file
+sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ >  /etc/apt/sources.list.d/jenkins.list'
+
+5 Update the apt repository
+  sudo apt-get update
+
+6 Install jenkins
+  sudo apt-get install -y jenkins
+

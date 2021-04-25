@@ -1,0 +1,24 @@
+3 Update the apt repository
+  sudo apt-get update
+
+4 Install jdk
+  sudo apt-get install -y openjdk-8-jdk
+
+5 Install git and maven
+  sudo apt-get install -y git maven
+
+6 Download jenkins.war
+ wget https://get.jenkins.io/war-stable/2.263.1/jenkins.war
+
+7 To start Jenkins  ----------we shall run this command every time when we want to start Jenkins  
+java -jar jenkins.war
+
+To access jenkins from browser
+  public_ip_of_jenkinsserver:8080
+
+9 Unlock jenkins by entering the password
+
+10 Click on "Install suggested plugins"
+
+11 Create First admin user--->Click on Continue--->Finish
+

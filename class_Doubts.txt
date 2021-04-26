@@ -31,4 +31,14 @@ date 23/04
 name: venky 
 docker image error tomee
 
+date 25/04 
+student name: ganesh 
+ansible playbook error ssh connection 
+
+ 
+date 26/04 
+student name naga prasad 
+syntax error in ansible playbook 
+
+
 

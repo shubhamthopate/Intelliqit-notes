@@ -13,7 +13,7 @@ we can join on-premeses devises to ADD using  domain join
 what is fedderations...?
 
 
-lab-1
+4
 login portal --> Azure Activer Directory--> directory name check it -->domain@on.microsoft.com
 users--> check user's name--> it will be username@domain_name
 go back to default directory --> custom  domain name-->add custom domain --> addd domain-->  go to registar like godaddy and add records overthere (TXT,MX record)  it will take time to validate --> after 20 hrs click on verify in azure 
@@ -67,7 +67,7 @@ MFA
 
 9
 mfa
-users-->maf (right corner)-->login as admin --> dashboard of mfa --> select user --> and enable mfa 
+users-->mfa (right corner)-->login as admin --> dashboard of mfa --> select user --> and enable mfa 
 
 10
 mfa methods 

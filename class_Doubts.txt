@@ -41,4 +41,12 @@ student name naga prasad
 syntax error in ansible playbook 
 
 
+date 28/04 
+
+stduent name: 9000065641
+jenkins/jenkins image error while pulling 
+
+student name: 7795891699  hari
+docker image pull error  region change 
+
 

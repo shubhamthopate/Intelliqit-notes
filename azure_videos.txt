@@ -71,3 +71,20 @@ users-->mfa (right corner)-->login as admin --> dashboard of mfa --> select user
 
 10
 mfa methods 
+
+11
+3 typrs of user A) clud identity B)Directly sync identities 3) Guests
+
+12
+????
+
+13 
+AD license 
+
+14
+used to join on premise to azure 
+Azure AD Domain Join  A) Registration a device B) joining a Device 
+
+15
+AD connect used to connect on premise to azure 
+AD connecct used for one way connection

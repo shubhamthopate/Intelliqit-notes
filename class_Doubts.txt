@@ -63,9 +63,17 @@ aws account activation
 date  30/04 
 docker container come out of container error 
 
-date 1/04 
+date 1/05 
 student name: +91 99936 50064
 docker project implement 
 
 student name: 7093859107
 passwordless authentication error 
+
+date: 02/05
+student name: +91 99936 50064
+docker project implement 
+
+date: 03/05
+student name : spananda +91 99498 30211
+docker compose file name error 

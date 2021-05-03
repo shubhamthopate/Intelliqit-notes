@@ -73,7 +73,7 @@ users-->mfa (right corner)-->login as admin --> dashboard of mfa --> select user
 mfa methods 
 
 11
-3 typrs of user A) clud identity B)Directly sync identities 3) Guests
+3 typrs of user A) clud identity B)Directory sync identities C) Guests
 
 12
 ????
@@ -87,4 +87,37 @@ Azure AD Domain Join  A) Registration a device B) joining a Device
 
 15
 AD connect used to connect on premise to azure 
-AD connecct used for one way connection
+AD connect used for one way connection
+
+16
+Azure AD connect health --> Health analytics --> syncro issues or duplicate issues --> configure notifiaction setup to get notified when error occurs 
+
+17
+Azure AD b2b-->simplified way to connect to Azure AD --> invite your client to access your app -->we can create new users and give users credentials to client to access app but 
+B2B  is the way to we can secure the way of client to access our apps
+Invite guest user with client 
+new guest users --> invite user --> fill the details --> invite --> then the user will be a part of Azure ADD 
+Oraganizational relationsship --> to see all invited users using B2B
+
+using B2B we dont need to install azure AD on onpremises 
+
+
+18
+B2C
+this is unique Azure AD tenant 
+sign in for your applications using identiy like facebook gmail 
+create resourse --> seacrch for B2C -->azure b2c--> click --> 2 options --> create Azure B2C 1st option fillthe deatils --> create 
+-->select existing azure AD b2c tenant 
+identity providers are gmail fb 
+used to create seperate isolated identity 
+
+19
+Azure AD monitering 
+to track sign in 
+risky sign in 
+will need licence to get location device  
+audit logs --> what sort of acttions are occured 
+sign in --> all iinfo about all users when they are lgin app access 
+usage and insights --> ativity related to authentications 
+logs --> to get more info about azure ad 
+giagnostic setting --> to store the data 

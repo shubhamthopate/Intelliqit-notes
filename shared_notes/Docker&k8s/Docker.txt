@@ -542,7 +542,7 @@ services:
   container_name: myjenkins
 
  qaserver:
-  image: tomcat
+  image: tomee
   ports:
    - 6060:8080
   links:
@@ -550,7 +550,7 @@ services:
   container_name: qaserver
 
  prodserver:
-  image: tomcat
+  image: tomee
   ports:
    - 7070:8080
   links:

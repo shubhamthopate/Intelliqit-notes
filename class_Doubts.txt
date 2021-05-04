@@ -78,4 +78,8 @@ date: 03/05
 student name : spananda +91 99498 30211
 docker compose file name error
 
+
+date 04/05 
+student name :+971 54 368 6596 raju 
+master slave path error in jobs
  

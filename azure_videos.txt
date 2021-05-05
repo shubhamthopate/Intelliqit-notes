@@ -121,3 +121,11 @@ sign in --> all iinfo about all users when they are lgin app access
 usage and insights --> ativity related to authentications 
 logs --> to get more info about azure ad 
 giagnostic setting --> to store the data 
+
+3 new section
+1
+management group
+
+2
+azure subscription
+

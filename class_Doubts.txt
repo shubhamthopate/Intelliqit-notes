@@ -90,4 +90,14 @@ docker come out of container using cntrl+p+q
 student name : 9160069994 
 jenkins path confirmations 
 /home/ubuntu/.jenkins/workspace 
+
+date 06/05 
+student name: +91 95525 88168
+docker service stop error 
+
+student name : +91 99667 47071
+vagrant up error 
+
+student name: +91 91600 69994
+jenkins slave.jar download error 
  

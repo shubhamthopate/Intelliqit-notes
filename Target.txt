@@ -16,3 +16,10 @@ Knowledge on Horizontal and vertical scalability of servers will be considered s
 
  MongoDB
 Web Scraping
+
+Subversion
+Gitlab
+GitLab CI Runners
+ Jenkins Pipelines and Artifactory 
+Shell scripting, Python, and Groovy 
+Agile

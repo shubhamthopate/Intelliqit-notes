@@ -5,3 +5,14 @@
 5) terraform
 6) shell scripting
 7) real time projects
+
+Configuration and Spinning up Linux Servers in a jiffy
+Linux servers should only follow best practices, no loose ends.
+Create System backups and Monitor system performance.
+Shielding servers from outside attacks.
+Be there when needed for all essential services
+Bring in and Enforce best-in-class processes for ensuring high availability of our systems
+Knowledge on Horizontal and vertical scalability of servers will be considered super power
+
+ MongoDB
+Web Scraping

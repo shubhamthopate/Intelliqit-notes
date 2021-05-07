@@ -1,0 +1,7 @@
+1) elastic ip pricing in  aws calculator
+2) python scripting
+3) maven
+4) nagios
+5) terraform
+6) shell scripting
+7) real time projects

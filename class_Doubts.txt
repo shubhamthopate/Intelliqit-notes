@@ -100,4 +100,8 @@ vagrant up error
 
 student name: +91 91600 69994
 jenkins slave.jar download error 
- 
+
+date 07/05 
+student name : +91 95525 88168
+docker service stop error 
+

@@ -14,12 +14,17 @@ Be there when needed for all essential services
 Bring in and Enforce best-in-class processes for ensuring high availability of our systems
 Knowledge on Horizontal and vertical scalability of servers will be considered super power
 
- MongoDB
+MongoDB
 Web Scraping
 
 Subversion
 Gitlab
 GitLab CI Runners
- Jenkins Pipelines and Artifactory 
+Jenkins Pipelines and Artifactory 
 Shell scripting, Python, and Groovy 
 Agile
+Azure devops
+ci-cd in aws
+EKS
+RDS
+chef

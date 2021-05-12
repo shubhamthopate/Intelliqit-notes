@@ -1,33 +1,40 @@
-1) elastic ip pricing in  aws calculator
-2) python scripting
-3) maven
-4) nagios
-5) terraform
-6) shell scripting
-7) real time projects
+DEVOPS
+===========
+python scripting --> 7 days                                    
+maven            --> 3 days
+Ansible          --> 7 days
+Terraform        --> 7 days
+Docker           --> 7 days
+nagios           --> 2 dyas
+K8s              --> 7 dyas
+chef             --> 7 dyas
+Jenkins Pipelines and Artifactory  --> 7 days 
+Shell scripting                    --> 7 days
+Agile                              --> 1 day
+bamboo                             --> 7 days 
+Subversion GitLab CI Runners,Gitlab  --> 3 days 
 
-Configuration and Spinning up Linux Servers in a jiffy
-Linux servers should only follow best practices, no loose ends.
-Create System backups and Monitor system performance.
-Shielding servers from outside attacks.
-Be there when needed for all essential services
-Bring in and Enforce best-in-class processes for ensuring high availability of our systems
-Knowledge on Horizontal and vertical scalability of servers will be considered super power
-
-MongoDB
-Web Scraping
-
-Subversion
-Gitlab
-GitLab CI Runners
-Jenkins Pipelines and Artifactory 
-Shell scripting, Python, and Groovy 
-Agile
-Azure devops
+AWS
+=========
+elastic ip pricing in  aws calculator      
+Create System backups and Monitor system performance
+RDS --> 1) MYSQL 2)MongoDB
 ci-cd in aws
 EKS
-RDS
-chef
-bamboo
+   
+AZURE
+=========
+Create System backups and Monitor system performance
+Azure devops
 AKS
 Azure sharepoint
+
+
+PROJECTS
+===========
+FREESTYLE (jenkins)sai's project on docker containers 
+https://youtu.be/vfw8zXyJtQA
+https://youtu.be/WhCbLGnG9JY
+https://youtu.be/T5I6fvH0h88
+https://youtu.be/xEy8bZDT4HA
+https://youtu.be/nP6uei3TBsc

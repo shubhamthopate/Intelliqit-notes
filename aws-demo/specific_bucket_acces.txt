@@ -1,0 +1,29 @@
+to give access of particular bucket to an iam user use following json policy 
+
+
+
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetBucketLocation",
+                "s3:ListAllMyBuckets"
+            ],
+            "Resource": "arn:aws:s3:::*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::BUCKET_NAME1",
+                "arn:aws:s3:::BUCKET_NAME1/*",
+                "arn:aws:s3:::BUCKET_NAME2",
+                "arn:aws:s3:::BUCKET_NAME2/*"
+            ]
+        }
+    ]
+}

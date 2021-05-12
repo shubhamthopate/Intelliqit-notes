@@ -28,3 +28,6 @@ ci-cd in aws
 EKS
 RDS
 chef
+bamboo
+AKS
+Azure sharepoint

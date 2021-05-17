@@ -3,7 +3,7 @@ DEVOPS
 python scripting --> 7 days                                    
 maven            --> 3 days
 Ansible          --> 7 days
-Terraform        --> 7 days
+Terraform        --> 7 days     https://www.youtube.com/playlist?list=PLVnWcdGotHcaoUBpwUrqNxL7VpIq136Bq
 Docker           --> 7 days
 nagios           --> 2 dyas
 K8s              --> 7 dyas
@@ -40,3 +40,6 @@ https://youtu.be/xEy8bZDT4HA
 https://youtu.be/nP6uei3TBsc
 
 https://www.youtube.com/playlist?list=PLBGx66SQNZ8ZvdIoctCTWB3ApXQpQGEin
+
+https://www.youtube.com/playlist?list=PLVnWcdGotHcapVIbp1dCUkT4fifxUz5kN
+

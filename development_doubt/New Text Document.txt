@@ -1,0 +1,6 @@
+1) difference between systemctl and service
+2) frontend backend
+3) languages used in company
+4) framework
+5) swagger
+6) 

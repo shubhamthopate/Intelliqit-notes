@@ -106,4 +106,21 @@ student name : +91 95525 88168
 docker service stop error 
 
 student name : +91 90307 17279
-docker ciommands without sudo error 
+diocker ciommands without sudo error 
+
+date 16/05
+student name : 89838 40891
+jenkins to slave passwordless connection
+
+date 17/05
+student name :+91 95525 88168
+aws bill case support
+
+student name :91600 69994
+cd to .war file
+
+date 18/05
+student name : +91 95971 99963
+docker service errror
+
+

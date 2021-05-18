@@ -3,4 +3,7 @@
 3) languages used in company
 4) framework
 5) swagger
-6) 
+6) git merge to master how to create pull request and merge with master 
+7) how to pull and push in Visual studio 
+8) how to transfer data to database --> how to add mysql credentials in code
+9) 

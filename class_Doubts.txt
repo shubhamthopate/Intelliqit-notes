@@ -123,4 +123,14 @@ date 18/05
 student name : +91 95971 99963
 docker service errror
 
+date 19/05 
+student name : 8566007100
+dockerfile commands error 
+
+student name : 9030717279
+docker service stopped errror 
+
+student name : 8688574001
+docker-composefile run command error 
+
 

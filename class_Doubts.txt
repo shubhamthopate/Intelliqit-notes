@@ -134,3 +134,11 @@ student name : 8688574001
 docker-composefile run command error 
 
 
+date 20/05
+student name : +91 83318 43157
+k8s GCP port open 
+
+student name : 9505399110
+server login issue 
+
+

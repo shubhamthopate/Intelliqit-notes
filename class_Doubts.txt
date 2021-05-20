@@ -141,4 +141,6 @@ k8s GCP port open
 student name : 9505399110
 server login issue 
 
+student name : +91 85009 18643
+security group nginx not opeining from browser 
 

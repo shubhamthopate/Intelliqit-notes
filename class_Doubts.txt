@@ -168,3 +168,20 @@ dockeer check exited contain4ers
 
 student name :+91 95505 73884
 how to come out of docker container 
+
+date 24/05 
+student name : +91 86020 94971
+resolved jenkins image pull and creating container 
+
+student name :+91 85660 07100
+interview Q
+
+student name : +91 82709 10024
+installed docker on windows on his machin 
+
+date 25/05 
+student name : +91 82709 10024
+installed docker on linux 
+
+student name : +91 99999 05088
+command error of docker mysql

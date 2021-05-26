@@ -185,3 +185,6 @@ installed docker on linux
 
 student name : +91 99999 05088
 command error of docker mysql
+
+student name : +91 83748 74437
+docker-compose file error 

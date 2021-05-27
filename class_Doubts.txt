@@ -188,3 +188,30 @@ command error of docker mysql
 
 student name : +91 83748 74437
 docker-compose file error 
+
+
+date 26/05 
+student name : +91 85009 18643
+docker-compose file error 
+
+student name : +91 82709 10024
+docker installation and hub.docker.com 
+
+
+student name : +91 72078 27650
+docker-compose file error 
+docker not installed 
+
+date 27/05 
+student name :+91 70322 21065
+jenkins pipeline error
+
+student name : +91 85009 18643
+docker-compose file error 
+
+student name : +91 82709 10024
+docker installation and hub.docker.com 
+
+
+student name : +91 72078 27650
+docker-compose file error 

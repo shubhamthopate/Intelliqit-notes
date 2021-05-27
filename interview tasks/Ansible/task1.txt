@@ -1,0 +1,83 @@
+Q1. Write an Ansible script to install multiple yum packages on a given server create a playbook?
+2. write a ansible script to fetch the folder from GIT repo and place in the remote server , Change the permission of the folder (755) and then restart the httpd service.
+3) Ansible playbook to do the following 
+1. Create user oracle with uid 8009 and group orcl with id 8010
+2. append the file /etc/fstab with below details at the end.
+100.67.34.34:/oracle_mount /b2b nfs4    defaults,_netdev,rsize=32768,wsize=32768,hard,nolock 0 0
+3. mount the new file system
+4. Create folders /oracle/apps and /oracle/test and make a symbolic link at /u0/oracle to reach the above folders.
+5. Copy the software to /oracle/apps from git repo.
+
+
+playbook-->
+
+---
+- name: Create users on managed node
+  hosts: all
+  tasks:
+   - name: Create group
+     group:
+      name: orcl
+      state: present
+      gid: 8010
+
+   - name: Create a user
+     user:
+      name: oracle
+      password: intelliqit
+      uid: 8009
+      home: /home/Anu
+      shell: /bin/bash
+      group: orcl
+
+   - name: append lines in existing folder
+     lineinfile:
+      dest: /etc/fstab
+      line: '{{ item }}'
+
+
+     with_items:
+      - '100.67.34.34:/oracle_mount /b2b nfs4    defaults,_netdev,rsize=32768,wsize=32768,hard,nolock 0 0'
+
+   - name: Creates directory
+     file:
+      path: '{{item}}'
+      state: directory
+     with_items:
+      - '/oracle/apps'
+      - '/oracle/test'
+      - '/u0/oracle'
+
+   - name: Create symbolic link
+     file:
+      src: "/oracle"
+      dest: "/u0/oracle/don"
+      state: link
+
+   - name: Install multiple s/w applications
+     apt:
+      name: "{{item}}"
+      state: present
+      update_cache: no
+     with_items:
+      - tree
+      - git
+      - maven
+
+   - name: to fetch the folder from GIT repo and place in the remote server
+     git:
+       repo: 'https://github.com/shubhamthopate/ganje.git'
+       dest: /home/ubuntu/amol
+
+   - name: changing folder permission
+     file:
+      path: /home/ubuntu/amol
+      state: directory
+      mode: 0755
+
+   - name: Copy the software to /oracle/apps from git repo
+     git:
+      repo: 'https://github.com/shubhamthopate/ganje.git'
+      dest: /oracle/apps/
+
+...

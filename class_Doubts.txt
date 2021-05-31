@@ -215,3 +215,11 @@ docker installation and hub.docker.com
 
 student name : +91 72078 27650
 docker-compose file error 
+
+
+date 28/05 
+student name : +91 70322 21065
+gitbash error 
+
+student name : +91 93969 79800
+instance start 

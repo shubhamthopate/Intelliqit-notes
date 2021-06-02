@@ -223,3 +223,10 @@ gitbash error
 
 student name : +91 93969 79800
 instance start 
+
+date 1/-5 
+student name : +91 86020 94971
+docker commit error 
+
+student name : 88852239336
+mysql root pass 

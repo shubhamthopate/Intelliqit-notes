@@ -354,7 +354,7 @@ Configuring apache2
   ansible all -m apt -a 'name=apache2 state=present' -b
 
 2 Edit the index.html file
-  ansible all -m copy -a 'content="Welcome to IntelliQ"                                        dest=/var/www/html/index.html'   -b
+  ansible all -m copy -a 'content="Welcome to IntelliQ" dest=/var/www/html/index.html'   -b
 
 3 Restart apache2
   ansible all -m service -a 'name=apache2 state=restarted' -b

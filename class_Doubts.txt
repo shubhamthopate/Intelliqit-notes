@@ -230,3 +230,15 @@ docker commit error
 
 student name : 88852239336
 mysql root pass 
+
+
+date 02/06 
+
+student name : +91 81978 88159
+jenkins installation and login issue 
+
+student name : +91 85009 18643
+dockerfile error 
+
+student name : +91 99498 30211
+docker node delete command 

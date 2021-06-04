@@ -242,3 +242,19 @@ dockerfile error
 
 student name : +91 99498 30211
 docker node delete command 
+
+
+date 04/06 
+student name: +91 81978 88159
+jenkins installation tomcat unstallation error 
+
+student name: +91 85009 18643
+docker-compose file error 
+
+student name:  +91 89855 07926
+docker container ping 
+
+student name : +91 96326 87287
+jenkins start --> access from browser 
+
+student name : 

@@ -1,0 +1,12 @@
+GITHUB EXTENSION TO SHOW SIZE OF EACH FILE
+
+
+1. open git repo in github
+2. go to browser and open --> enhanced gihub using following link
+https://chrome.google.com/webstore/detail/enhanced-github/anlikcnbgdeidpacdbdljnabclhahhmd?hl=en
+
+3. add that extension
+4. open that extension once downloaded (right upper corner of chrome)
+5. github --> settings --> developer setting --> personal access token --> genereate new token
+6. add in step4
+7. refresh github page opened in step 1

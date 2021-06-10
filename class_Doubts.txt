@@ -257,4 +257,44 @@ docker container ping
 student name : +91 96326 87287
 jenkins start --> access from browser 
 
-student name : 
+date 05/06 
+student name : +91 93980 78173
+jenkins setup error 
+
+student name +91 85660 07100
+k8s questions 
+
+student name : +91 91332 78070
+vagrant up 
+
+student name : +91 70322 21065
+jenkins git branch error master to main 
+
+
+07/06 
+student name: +91 93980 78173
+gitbash 
+
+studen name: +91 95815 39064
+ansible error 
+
+student name : +91 86020 94971
+docker file image generate error 
+
+date 08/06 
+student name: +91 81978 88159
+git practice error 
+
+student name: +91 96326 87287
+jenkins deployment error 
+
+student name: +91 96185 60720
+content delete in tomcat-users.xml file 
+
+student name: +91 93980 78173
+git practice file eddit error 
+
+student name : +91 77958 91699
+k8s pod creation error 
+
+

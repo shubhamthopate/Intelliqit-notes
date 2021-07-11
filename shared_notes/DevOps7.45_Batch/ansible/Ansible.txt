@@ -923,12 +923,6 @@ To execute modules with a specific tag name
 ansible-playbook playbook14.yml --tags=user_creation -b
 
 
-
-
-
-===============================================================================
-Day 10
-==============================================================================
 when conditions
 ===================
 This is used to execute a playbook based on a specific
@@ -985,7 +979,7 @@ Day 8
      when: result.stat.executable == false
 
 
-========================================================================
+============================================================`============
 Handlers
 ===================
 1 Handlers are modules that are executed if some other module is executed
@@ -1125,7 +1119,7 @@ executed only if we know the password
   ansible-vault encrypt playbook_name.yml
 
 5 To convert a vault playbook into an ordinary playbook
-  ansible-vault decrypt playbook_name.yml
+  ansible-vault decrypt playbook_name.yml 
 
 6 To reset the password of a vault  playbook
   ansible-vault rekey playbook_name.yml

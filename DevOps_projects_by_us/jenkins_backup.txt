@@ -1,0 +1,24 @@
+jenkins backup 
+
+create s3 bucket 
+create IAM role which has s3 full access  and attach this role to Instance 
+Login to jenkins and shut down jenkins service 
+cleanup all unnecessary data 
+cd /var/lib/jenkins/.m2 and rm -rf * 
+cd /var/lib/jenkins/workspace and rm -rf * 
+cd /var/lib/jenkins/jobs/BuildProject  and rm -rf 9 10 1 (these are archive files when you archile **/*.war )
+cd /var/lib/jenkins/jobs/  and du -sh * or du -sh 
+Archive /var/lib/jenkins 
+cd /var/lib/  and tar -czvf jenkins_backup.tar.gz  jenkins 
+jenkins_backup.tar.gz this file will be generated and copy this file in s3 or github or anywhere 
+
+Launch new server and install jenkins on it 
+stop the jenkins service 
+copy jenkins_backup.tar.gz  to /var/lib 
+tar xvzf jenkins_backup.tar.gz 
+cd /var/lib/ and sudo chown jenkins.jenkins jenkins -R 
+systemctl start jenkins 
+ 
+
+
+ 

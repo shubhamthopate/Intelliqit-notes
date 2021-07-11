@@ -1,0 +1,11 @@
+login to slack 
+create new channel 
+create bot --> api.slack.com --> start building --> create new app ,give name and mention your workspace name 
+click on Oauth & permission --> Bot Token Scopes -->chat:write --> scroll up --> install app to workspace 
+then you will get token --> note the token id 
+go to slack workspace --> open channel --> type @App_Name --> invite to this channel 
+Go to jenkins Dashboard --> install slack plugin 
+manage jenkins --> crdentials --> global crdentials --> add credentials --> kind = secret text and copy paste the token that you have noted 
+manage jenkins --> configure system --> search slack setting --> put checkmark on Custom slack app bot user --> save and apply 
+click on any job --> click on post build actions --> select slack --> check mark on any of the state you want --> credentials select slack-tokem--> give workspace name and channel name --> save and apply 
+test the connection it will show success 
